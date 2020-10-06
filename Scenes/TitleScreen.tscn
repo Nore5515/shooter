@@ -46,6 +46,7 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="Begin"]
+visible = false
 margin_left = -110.95
 margin_top = 39.0154
 margin_right = 178.374
@@ -145,6 +146,7 @@ text = "QUIT"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="finished" from="VideoPlayer" to="." method="_on_VideoPlayer_finished"]
 [connection signal="pressed" from="Begin" to="Begin/Panel" method="_on_Button_pressed"]
 [connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/Tutorial" to="Begin/Panel" method="_on_Tutorial_pressed"]
 [connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/TargetSpeedrun" to="Begin/Panel" method="_on_TargetSpeedrun_pressed"]
