@@ -150,3 +150,4 @@ __meta__ = {
 [connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/TargetSpeedrun" to="Begin/Panel" method="_on_TargetSpeedrun_pressed"]
 [connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/TargetTimeTrial2" to="Begin/Panel" method="_on_TargetTimeTrial2_pressed"]
 [connection signal="pressed" from="Begin/Panel/Start" to="Begin/Panel" method="_on_Start_pressed"]
+[connection signal="pressed" from="Quit" to="Begin/Panel" method="_on_Quit_pressed"]

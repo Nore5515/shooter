@@ -31,6 +31,7 @@ func _on_TargetSpeedrun_pressed():
 		resetStuff()
 		targetSpeedrun = true
 		$ScenarioDesc.text = "Try to destroy all the targets as quickly as possible!"
+		$ScenarioPic.texture = load("res://Images/timeTrialPreview.PNG")
 
 
 func _on_TargetTimeTrial2_pressed():
@@ -41,6 +42,7 @@ func _on_TargetTimeTrial2_pressed():
 		resetStuff()
 		targetTimeTrial = true
 		$ScenarioDesc.text = "Can you destroy all the targets in the given time?"
+		$ScenarioPic.texture = load("res://Images/timeTrialPreview.PNG")
 
 
 func _on_Button_pressed():
@@ -54,3 +56,7 @@ func _on_Start_pressed():
 		get_tree().change_scene("res://Scenes/TargetSpeedrun.tscn")
 	elif targetTimeTrial:
 		get_tree().change_scene("res://Scenes/TargetTimeTrial.tscn")
+
+
+func _on_Quit_pressed():
+	get_tree().quit()
