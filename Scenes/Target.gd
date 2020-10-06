@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 
 
-var HP = 3
+export (int) var HP = 1
 
 
 

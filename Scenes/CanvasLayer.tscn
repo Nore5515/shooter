@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://8bitFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scenes/TimerCount.gd" type="Script" id=2]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="AmmoCount" type="Label" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 843.0
+margin_top = 541.0
+margin_right = 883.0
+margin_bottom = 555.0
+rect_scale = Vector2( 4.45137, 4.03018 )
+custom_fonts/font = ExtResource( 1 )
+text = "7/7"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoReserves" type="Label" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 912.0
+margin_top = 502.0
+margin_right = 966.0
+margin_bottom = 527.0
+rect_scale = Vector2( 2.03214, 2.03214 )
+custom_fonts/font = ExtResource( 1 )
+text = "22"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerCount" type="Label" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 2.99999
+margin_top = 561.0
+margin_right = 101.0
+margin_bottom = 575.0
+rect_scale = Vector2( 2.79957, 2.79957 )
+custom_fonts/font = ExtResource( 1 )
+text = "23:00"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stopwatch" type="Timer" parent="TimerCount"]
