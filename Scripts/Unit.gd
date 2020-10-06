@@ -2,13 +2,13 @@ extends KinematicBody2D
 
 
 
-var pistolAmmoReserves = 10
-var pistolAmmo = 12
+export (int) var pistolAmmoReserves = 10
+export (int) var pistolAmmo = 12
 var maxPistolAmmo = 12
 
 var reloading = false
 
-var speed = 25
+var speed = 40
 var left = false
 var right = false
 var up = false
@@ -56,9 +56,9 @@ func _process(_delta):
 		
 	if left || right || up || down:
 		if sprinting:
-			get_parent().get_node("AimingReticle").recoilReticle(0.06)
+			get_parent().get_node("AimingReticle").recoilReticle(0.075)
 		else:
-			get_parent().get_node("AimingReticle").recoilReticle(0.03)
+			get_parent().get_node("AimingReticle").recoilReticle(0.02)
 			
 
 func _input(event):
@@ -95,6 +95,11 @@ func _input(event):
 			
 			$ReloadBar/ReloadSound.play()
 
+	elif event.is_action_pressed("esc"):
+		get_tree().change_scene("res://Scenes/TitleScreen.tscn")
+	elif event.is_action_pressed("restart"):
+		get_tree().change_scene("res://Scenes/" + get_tree().get_current_scene().get_name() + ".tscn")
+
 	# MOVE STUFF
 	elif event.is_action_pressed("left"):
 		left = true
@@ -106,7 +111,7 @@ func _input(event):
 		down = true
 	elif event.is_action_pressed("sprint"):
 		sprinting = true
-		speed = 75
+		speed = 85
 	
 	elif event.is_action_released("left"):
 		left = false
@@ -118,7 +123,7 @@ func _input(event):
 		down = false
 	elif event.is_action_released("sprint"):
 		sprinting = false
-		speed = 25
+		speed = 40
 		
 	
 

@@ -69,4 +69,8 @@ stream = ExtResource( 7 )
 [node name="AmmoPickup" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
 volume_db = 5.049
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.25, 0.25 )
 [connection signal="timeout" from="ReloadBar/ReloadTime" to="." method="_on_ReloadTime_timeout"]

@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Images/titleBG.ogv" type="VideoStream" id=1]
 [ext_resource path="res://8bitFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scenes/Panel.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/TitleScreen.gd" type="Script" id=4]
 
 [node name="TitleScreen" type="Node2D"]
+script = ExtResource( 4 )
 
 [node name="VideoPlayer" type="VideoPlayer" parent="."]
 margin_left = -300.0
@@ -103,6 +105,7 @@ __meta__ = {
 margin_left = 158.907
 margin_right = 288.0
 margin_bottom = 61.0
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -112,6 +115,9 @@ margin_left = 290.99
 margin_top = 0.81282
 margin_right = 322.0
 margin_bottom = 120.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="Begin/Panel/Start"]
 margin_left = 7.72183

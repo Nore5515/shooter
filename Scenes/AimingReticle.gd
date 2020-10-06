@@ -5,7 +5,8 @@ extends Node2D
 var baseScale = Vector2(0.2,0.2)
 var clickScale = Vector2(0,0)#Vector2(baseScale.x + baseScale.x * 0.1,baseScale.y + baseScale.y * 0.1)
 
-var idealRange = 70
+var idealRange = 60
+var easeMod = 0.9
 
 func _ready():
 	randomize()
@@ -36,6 +37,7 @@ func recoilReticle(recoilAmount):
 
 func getPointInSquare():
 	var size = get_node("AimingSquare").texture.get_size() * scale
+	size *= easeMod
 	var point = Vector2(randf() * (size.x * 2), randf() * (size.y * 2))
 	point -= Vector2(size.x, size.y)
 	point += position
