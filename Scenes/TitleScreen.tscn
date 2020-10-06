@@ -1,0 +1,146 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Images/titleBG.ogv" type="VideoStream" id=1]
+[ext_resource path="res://8bitFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Scenes/Panel.gd" type="Script" id=3]
+
+[node name="TitleScreen" type="Node2D"]
+
+[node name="VideoPlayer" type="VideoPlayer" parent="."]
+margin_left = -300.0
+margin_top = -177.0
+margin_right = 516.0
+margin_bottom = 255.0
+rect_scale = Vector2( 0.788209, 0.875674 )
+stream = ExtResource( 1 )
+autoplay = true
+expand = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+margin_left = 173.0
+margin_top = 37.0
+margin_right = 322.0
+margin_bottom = 51.0
+rect_scale = Vector2( 4.5402, 4.5402 )
+custom_fonts/font = ExtResource( 2 )
+text = "UNTITLED SHOOTER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Begin" type="Button" parent="."]
+margin_left = 431.0
+margin_top = 138.0
+margin_right = 489.0
+margin_bottom = 158.0
+rect_scale = Vector2( 2.46057, 2.46057 )
+custom_fonts/font = ExtResource( 2 )
+text = "BEGIN"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Begin"]
+margin_left = -110.95
+margin_top = 39.0154
+margin_right = 178.374
+margin_bottom = 159.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Begin/Panel"]
+margin_right = 289.0
+margin_bottom = 119.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Begin/Panel/ScrollContainer"]
+margin_right = 159.0
+margin_bottom = 62.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tutorial" type="Button" parent="Begin/Panel/ScrollContainer/VBoxContainer"]
+margin_right = 159.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 2 )
+text = "Tutorial"
+
+[node name="TargetSpeedrun" type="Button" parent="Begin/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 22.0
+margin_right = 159.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 2 )
+text = "Target Speedrun"
+
+[node name="TargetTimeTrial2" type="Button" parent="Begin/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 44.0
+margin_right = 159.0
+margin_bottom = 62.0
+custom_fonts/font = ExtResource( 2 )
+text = "Target Time Trial"
+
+[node name="ScenarioDesc" type="Label" parent="Begin/Panel"]
+margin_left = 160.532
+margin_top = 63.8065
+margin_right = 402.0
+margin_bottom = 168.0
+rect_scale = Vector2( 0.53217, 0.53217 )
+custom_fonts/font = ExtResource( 2 )
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScenarioPic" type="TextureRect" parent="Begin/Panel"]
+margin_left = 158.907
+margin_right = 288.0
+margin_bottom = 61.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="Begin/Panel"]
+margin_left = 290.99
+margin_top = 0.81282
+margin_right = 322.0
+margin_bottom = 120.0
+
+[node name="Label" type="Label" parent="Begin/Panel/Start"]
+margin_left = 7.72183
+margin_top = 4.87693
+margin_right = 18.7218
+margin_bottom = 86.8769
+rect_scale = Vector2( 1.33175, 1.33175 )
+custom_fonts/font = ExtResource( 2 )
+text = "START"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 446.0
+margin_top = 529.0
+margin_right = 494.0
+margin_bottom = 549.0
+rect_scale = Vector2( 2.63029, 2.63029 )
+custom_fonts/font = ExtResource( 2 )
+text = "QUIT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Begin" to="Begin/Panel" method="_on_Button_pressed"]
+[connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/Tutorial" to="Begin/Panel" method="_on_Tutorial_pressed"]
+[connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/TargetSpeedrun" to="Begin/Panel" method="_on_TargetSpeedrun_pressed"]
+[connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/TargetTimeTrial2" to="Begin/Panel" method="_on_TargetTimeTrial2_pressed"]
+[connection signal="pressed" from="Begin/Panel/Start" to="Begin/Panel" method="_on_Start_pressed"]

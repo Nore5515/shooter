@@ -17,6 +17,11 @@ var sprinting = false
 
 
 
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+
+
 func _process(_delta):
 	
 
@@ -68,7 +73,7 @@ func _input(event):
 			$ReloadBar/PistolShootSound.stop()
 			$ReloadBar/PistolShootSound.play()
 			
-			get_parent().get_node("AimingReticle").recoilReticle(0.5)
+			get_parent().get_node("AimingReticle").recoilReticle(0.35)
 			
 			pistolAmmo -= 1
 			
@@ -121,11 +126,9 @@ func _input(event):
 
 func _on_ReloadTime_timeout():
 	if pistolAmmoReserves >= maxPistolAmmo:
-		print ("what")
 		pistolAmmo = maxPistolAmmo
 		pistolAmmoReserves -= maxPistolAmmo
 	else:
-		print ("no")
 		pistolAmmo += pistolAmmoReserves
 		pistolAmmoReserves = 0
 
