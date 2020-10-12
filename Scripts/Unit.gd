@@ -15,7 +15,7 @@ var up = false
 var down = false
 var sprinting = false
 
-
+var recoil = 0
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -24,6 +24,8 @@ func _ready():
 
 func _process(_delta):
 	
+	#print (recoil)
+	recoil = lerp(0.0, recoil, 0.80)
 
 	var directionToMouse = get_global_mouse_position() - $HandPivot.global_position
 	if abs($HandPivot.rotation - directionToMouse.angle()) > 5:
@@ -57,8 +59,10 @@ func _process(_delta):
 	if left || right || up || down:
 		if sprinting:
 			get_parent().get_node("AimingReticle").recoilReticle(0.075)
+			recoil += 0.075
 		else:
 			get_parent().get_node("AimingReticle").recoilReticle(0.02)
+			recoil += 0.02
 			
 
 func _input(event):
@@ -68,12 +72,16 @@ func _input(event):
 			var bulletInstance = load("res://Scenes/Bullet.tscn").instance()
 			get_parent().add_child(bulletInstance)
 			bulletInstance.global_position = $HandPivot/Pistol.global_position
-			bulletInstance.look_at(get_parent().get_node("AimingReticle").getPointInSquare())
+			bulletInstance.look_at(get_parent().get_node("AimingReticle").global_position)
+			#bulletInstance.look_at(get_parent().get_node("AimingReticle").getPointInSquare())
+			bulletInstance.rotate( (  randf() * (recoil*2)  )    - recoil)
+			bulletInstance.dest = get_parent().get_node("AimingReticle").global_position
 			
 			$ReloadBar/PistolShootSound.stop()
 			$ReloadBar/PistolShootSound.play()
 			
-			get_parent().get_node("AimingReticle").recoilReticle(0.35)
+			get_parent().get_node("AimingReticle").recoilReticle(0.65)
+			recoil += 0.35
 			
 			pistolAmmo -= 1
 			

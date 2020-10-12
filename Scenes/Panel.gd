@@ -3,12 +3,16 @@ extends Panel
 var tut = false
 var targetSpeedrun = false
 var targetTimeTrial = false
+var movingTargets = false
+var zombies = false
 
 
 func resetStuff():
 	tut = false
 	targetSpeedrun = false
 	targetTimeTrial = false
+	movingTargets = false
+	zombies = false
 	$ScenarioPic.texture = null
 	$ScenarioDesc.text = ""
 
@@ -56,7 +60,35 @@ func _on_Start_pressed():
 		get_tree().change_scene("res://Scenes/TargetSpeedrun.tscn")
 	elif targetTimeTrial:
 		get_tree().change_scene("res://Scenes/TargetTimeTrial.tscn")
+	elif movingTargets:
+		get_tree().change_scene("res://Scenes/MovingTargets.tscn")
+	elif zombies:
+		get_tree().change_scene("res://Scenes/Zombies.tscn")
+		
 
 
 func _on_Quit_pressed():
 	get_tree().quit()
+
+
+func _on_MovingTargets_pressed():
+	if movingTargets:
+		movingTargets = false
+		resetStuff()
+	else:
+		resetStuff()
+		movingTargets = true
+		$ScenarioDesc.text = "Destroy all targets! Missing one will result in a game over!"
+		$ScenarioPic.texture = load("res://Images/timeTrialPreview.PNG")
+
+
+
+func _on_Zombies_pressed():
+	if zombies:
+		zombies = false
+		resetStuff()
+	else:
+		resetStuff()
+		zombies = true
+		$ScenarioDesc.text = "Zombies! Survive as long as you can!"
+		$ScenarioPic.texture = load("res://Images/zombiesPreview.PNG")

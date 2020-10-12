@@ -4,6 +4,8 @@ extends KinematicBody2D
 
 export (int) var HP = 1
 
+export (bool) var moving = false
+export (int) var speed = 1
 
 
 # Return TRUE if the bullet should kill itself.
@@ -25,3 +27,8 @@ func strikeByBullet():
 func _on_HitSound_finished():
 	if HP <= 0:
 		queue_free()
+
+
+func _process(delta):
+	if moving:
+		self.translate(transform.x * speed)

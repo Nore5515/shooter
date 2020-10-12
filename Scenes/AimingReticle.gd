@@ -42,4 +42,4 @@ func getPointInSquare():
 	point -= Vector2(size.x, size.y)
 	point += position
 	return point
-	
+
