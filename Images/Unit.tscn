@@ -11,24 +11,16 @@
 [ext_resource path="res://Images/betterBody.png" type="Texture" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3, 4 )
+extents = Vector2( 3, 3 )
 
 [node name="Unit" type="KinematicBody2D" groups=[
 "player",
 ]]
 script = ExtResource( 4 )
 
-[node name="HeadCollider" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -3 )
+[node name="MainCollider" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 4 )
 shape = SubResource( 1 )
-
-[node name="BodyCollider" type="CollisionPolygon2D" parent="."]
-position = Vector2( -1, 1 )
-polygon = PoolVector2Array( -1, 5, 3, 5, 5, 4, 5, 0, -3, 0, -3, 4 )
-
-[node name="LegCollider" type="CollisionPolygon2D" parent="."]
-position = Vector2( -2, 0 )
-polygon = PoolVector2Array( 0, 6, 4, 6, 4, 8, -1, 8 )
 
 [node name="HandPivot" type="Node2D" parent="."]
 

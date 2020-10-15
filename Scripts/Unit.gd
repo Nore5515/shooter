@@ -15,9 +15,12 @@ var up = false
 var down = false
 var sprinting = false
 
+var zoomed = false
+
 var recoil = 0
 
 var dead = false
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -125,7 +128,7 @@ func _input(event):
 				$ReloadBar/PistolShootSound.play()
 				
 				for zombie in get_tree().get_nodes_in_group("zombie"):
-					zombie.hearGunshot()
+					zombie.hearGunshot(self.global_position)
 				
 				get_parent().get_node("AimingReticle").recoilReticle(0.65)
 				recoil += 0.35
@@ -179,6 +182,16 @@ func _input(event):
 		elif event.is_action_released("sprint"):
 			sprinting = false
 			speed = 40
+			
+		elif event.is_action_pressed("zoom"):
+			if zoomed == true:
+				zoomed = false
+				$Camera2D.zoom = Vector2(0.5, 0.5)
+			
+			elif zoomed == false:
+				zoomed = true
+				$Camera2D.zoom = Vector2(0.25, 0.25)
+				
 
 
 

@@ -34,7 +34,7 @@ func _process(delta):
 		if relax2 == false:
 			relax2 = true
 		else:
-			$Detection/DetectionSphere.shape.radius = 60
+			#$Detection/DetectionSphere.shape.radius = 60
 			relax = true
 	
 	if !headshotted:
@@ -155,8 +155,12 @@ func _on_Detection_body_exited(body):
 			idleZombie = true
 
 
-func hearGunshot():
-	$Detection/DetectionSphere.shape.radius = 200
+func hearGunshot(gunshotLoc):
+	
+	if gunshotLoc.distance_to(self.global_position) < 200:
+		lastSceenPos = gunshotLoc
+	
+	#$Detection/DetectionSphere.shape.radius = 200
 	relax = false
 	relax2 = false
 	
