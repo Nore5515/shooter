@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/betterBody.png-3eb2f3703e177122c726c44abb08b428.stex"
+path="res://.import/deadZombieHead.png-41540e3043d44206c11b1518b6363151.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/betterBody.png"
-dest_files=[ "res://.import/betterBody.png-3eb2f3703e177122c726c44abb08b428.stex" ]
+source_file="res://Images/newSTUFF/deadZombieHead.png"
+dest_files=[ "res://.import/deadZombieHead.png-41540e3043d44206c11b1518b6363151.stex" ]
 
 [params]
 

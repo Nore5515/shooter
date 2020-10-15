@@ -5,6 +5,7 @@ var targetSpeedrun = false
 var targetTimeTrial = false
 var movingTargets = false
 var zombies = false
+var zombieTown = false
 
 
 func resetStuff():
@@ -15,6 +16,7 @@ func resetStuff():
 	zombies = false
 	$ScenarioPic.texture = null
 	$ScenarioDesc.text = ""
+	$BestTime.text = ""
 
 func _on_Tutorial_pressed():
 	if tut:
@@ -36,6 +38,8 @@ func _on_TargetSpeedrun_pressed():
 		targetSpeedrun = true
 		$ScenarioDesc.text = "Try to destroy all the targets as quickly as possible!"
 		$ScenarioPic.texture = load("res://Images/timeTrialPreview.PNG")
+		$BestTime.text = "Best Time: " + String(\
+			get_node("/root/Global").bestTargetSpeedrunTime)
 
 
 func _on_TargetTimeTrial2_pressed():
@@ -47,7 +51,8 @@ func _on_TargetTimeTrial2_pressed():
 		targetTimeTrial = true
 		$ScenarioDesc.text = "Can you destroy all the targets in the given time?"
 		$ScenarioPic.texture = load("res://Images/timeTrialPreview.PNG")
-
+		$BestTime.text = "Best Time Remaining: " + String(\
+			get_node("/root/Global").bestTimeTrial2Time)
 
 func _on_Button_pressed():
 	visible = !visible
@@ -64,6 +69,8 @@ func _on_Start_pressed():
 		get_tree().change_scene("res://Scenes/MovingTargets.tscn")
 	elif zombies:
 		get_tree().change_scene("res://Scenes/Zombies.tscn")
+	elif zombieTown:
+		get_tree().change_scene("res://Scenes/ZombieTown.tscn")
 		
 
 
@@ -80,7 +87,7 @@ func _on_MovingTargets_pressed():
 		movingTargets = true
 		$ScenarioDesc.text = "Destroy all targets! Missing one will result in a game over!"
 		$ScenarioPic.texture = load("res://Images/timeTrialPreview.PNG")
-
+		
 
 
 func _on_Zombies_pressed():
@@ -92,3 +99,18 @@ func _on_Zombies_pressed():
 		zombies = true
 		$ScenarioDesc.text = "Zombies! Survive as long as you can!"
 		$ScenarioPic.texture = load("res://Images/zombiesPreview.PNG")
+		$BestTime.text = "Best Time: " + String(\
+			get_node("/root/Global").bestZombiesTime)
+
+
+func _on_Zombies2_pressed():
+	if zombieTown:
+		zombieTown = false
+		resetStuff()
+	else:
+		resetStuff()
+		zombieTown = true
+		$ScenarioDesc.text = "Clear out the infected town!"
+		$ScenarioPic.texture = load("res://Images/zombieTownScreenshot.PNG")
+		$BestTime.text = "Best Time: " + String(\
+			get_node("/root/Global").bestZombiesTime)
