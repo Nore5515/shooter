@@ -95,6 +95,24 @@ position = Vector2( 497, 408 )
 [node name="Crate" parent="." instance=ExtResource( 7 )]
 position = Vector2( -88, 155 )
 
+[node name="Crate3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 98, 282 )
+
+[node name="Crate4" parent="." instance=ExtResource( 7 )]
+position = Vector2( 425, 237 )
+
+[node name="Crate5" parent="." instance=ExtResource( 7 )]
+position = Vector2( 70, -68 )
+
+[node name="Crate6" parent="." instance=ExtResource( 7 )]
+position = Vector2( 454, -83 )
+
+[node name="Crate7" parent="." instance=ExtResource( 7 )]
+position = Vector2( 435, -85 )
+
+[node name="Crate8" parent="." instance=ExtResource( 7 )]
+position = Vector2( 449, -65 )
+
 [node name="Crate2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 310, 27 )
 
