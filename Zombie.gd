@@ -23,6 +23,8 @@ var moving = true
 var relax = true
 var relax2 = true
 
+var yelling = false
+
 func _ready():
 	lastSceenPos = position
 
@@ -67,32 +69,70 @@ func _process(delta):
 		queue_free()
 
 	if global_position.direction_to(playerPos).x > 0:
-		$zombieBody.flip_h = true
-		$zombieHead.flip_h = true
+		$ZombieSpriteParts.scale.x = 1
 	else:
-		$zombieBody.flip_h = false
-		$zombieHead.flip_h = false
+		$ZombieSpriteParts.scale.x = -1
 		
 	if global_position.distance_to\
 	(get_tree().get_nodes_in_group("player")[0].global_position) < 30:
-		$openMouthHead.visible = true
-		$zombieHead2.visible = false
+		yelling = true
 		if !legsBroken:
 			speed = 40
 	else:
-		$openMouthHead.visible = false
-		$zombieHead2.visible = true
+		yelling = false
 		if !legsBroken:
 			speed = 25
 		
+		
+	hideAll()
+	
 	if headshotted:
 		speed = 10
-		$openMouthHead.visible = false
-		$zombieHead2.visible = false
-		$deadHead.visible = true
+		$ZombieSpriteParts/zombieDead.visible = true
 		$bloodParticles.visible = true
+	
+	else:
+		if yelling:
+			$ZombieSpriteParts/zombieAttacking.visible = true
+		else:
+			
+			if moving:
+				$ZombieSpriteParts/zombieSeeking.visible = true
+			else:
+				
+				$ZombieSpriteParts/zombieIdle.visible = true
+	
+	
+	if global_position.direction_to(playerPos).y < 0:
+		hideAll()
+		$ZombieSpriteParts/zombieBack.visible = true
+	
+	if global_position.direction_to(playerPos).y < 0 && headshotted:
+		hideAll()
+		$ZombieSpriteParts/zombieBackDead.visible = true
 		
-	#if global_position.direction_to(playerPos).x 
+	
+	if moving && !headshotted:
+		$ZombieSpriteParts/zombieLArmPivot.look_at(playerPos)
+		$ZombieSpriteParts/zombieLArmPivot.rotation_degrees -= 90
+		$ZombieSpriteParts/zombieRArmPivot.look_at(playerPos)
+		$ZombieSpriteParts/zombieRArmPivot.rotation_degrees -= 90
+	
+	
+			
+		
+	
+	
+
+
+func hideAll():
+	$ZombieSpriteParts/zombieAttacking.visible = false
+	$ZombieSpriteParts/zombieBack.visible = false
+	$ZombieSpriteParts/zombieIdle.visible = false
+	$ZombieSpriteParts/zombieSeeking.visible = false
+	$ZombieSpriteParts/zombieDead.visible = false
+	$ZombieSpriteParts/zombieBackDead.visible = false
+
 
 func _on_Head_area_entered(area):
 	if area.is_in_group("bullet") && !headshotted:
@@ -119,13 +159,6 @@ func _on_Legs_area_entered(area):
 			legsHP -= 25
 			area.queue_free()
 			$MeatHit.play()
-
-
-func _on_Hitbox_body_entered(body):
-	if body.is_in_group("player"):
-		if !headshotted:
-			body.die()
-			#get_tree().change_scene("res://Scenes/TitleScreen.tscn")
 
 # Death
 func _on_Timer_timeout():
@@ -164,3 +197,15 @@ func hearGunshot(gunshotLoc):
 	relax = false
 	relax2 = false
 	
+
+
+func _on_rArm_body_entered(body):
+	if body.is_in_group("player"):
+		if !headshotted:
+			body.die()
+
+
+func _on_rArm2_body_entered(body):
+	if body.is_in_group("player"):
+		if !headshotted:
+			body.die()
