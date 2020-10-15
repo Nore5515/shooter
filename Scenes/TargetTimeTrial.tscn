@@ -5,10 +5,11 @@
 [ext_resource path="res://Scenes/Crate.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Rock.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Tilemap.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Unit.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Images/Unit.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Target.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Images/bg.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/TimerCount.gd" type="Script" id=9]
+
 
 [node name="TargetTimeTrial" type="Node2D"]
 
@@ -92,11 +93,25 @@ script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-stopwatchMode = true
+targetLevel = true
 
 [node name="Stopwatch" type="Timer" parent="CanvasLayer/TimerCount"]
 wait_time = 15.0
 one_shot = true
+
+[node name="finalTime" type="Label" parent="CanvasLayer"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 412.0
+margin_top = 192.0
+margin_right = 459.0
+margin_bottom = 206.0
+rect_scale = Vector2( 3.12885, 3.12885 )
+custom_fonts/font = ExtResource( 2 )
+text = "adsdaw"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Rock" parent="." instance=ExtResource( 4 )]
 position = Vector2( -56, -21 )

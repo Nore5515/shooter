@@ -6,9 +6,12 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3, 3 )
 
-[node name="Bullet" type="Area2D"]
+[node name="Bullet" type="Area2D" groups=[
+"bullet",
+]]
 modulate = Color( 1, 0.113725, 0.113725, 1 )
 scale = Vector2( 0.233988, 0.233988 )
+collision_layer = 3
 script = ExtResource( 2 )
 
 [node name="head" type="Sprite" parent="."]

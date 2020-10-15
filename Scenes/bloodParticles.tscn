@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 1, 0, 0, 1, 0.476563, 0.167803, 0.117279, 1 )
+
+[node name="bloodParticles" type="CPUParticles2D"]
+visible = false
+position = Vector2( 0.087603, -6.36547 )
+rotation = 3.14159
+scale = Vector2( 0.679573, -0.542595 )
+amount = 13
+direction = Vector2( 0, -1 )
+gravity = Vector2( 0, 98 )
+initial_velocity = 64.52
+color_ramp = SubResource( 3 )

@@ -1,0 +1,128 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Images/zombieBody.png" type="Texture" id=2]
+[ext_resource path="res://Zombie.gd" type="Script" id=3]
+[ext_resource path="res://Sounds/legSmashSound.wav" type="AudioStream" id=4]
+[ext_resource path="res://Sounds/meatHit.wav" type="AudioStream" id=5]
+[ext_resource path="res://Images/zombieHead.png" type="Texture" id=6]
+[ext_resource path="res://Images/newSTUFF/zombieHead.png" type="Texture" id=7]
+[ext_resource path="res://Images/newSTUFF/openmouthZombieHead.png" type="Texture" id=8]
+[ext_resource path="res://Images/newSTUFF/deadZombieHead.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/bloodParticles.tscn" type="PackedScene" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 3, 4 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 3, 4 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 60.0
+
+[node name="Zombie" type="KinematicBody2D" groups=[
+"zombie",
+]]
+collision_layer = 2
+script = ExtResource( 3 )
+
+[node name="HeadCollider" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -8 )
+shape = SubResource( 1 )
+
+[node name="BodyCollider" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, -1 )
+polygon = PoolVector2Array( 4, -3, -4, -3, -4, 1, 4, 1, 4, -3, 4, -3, 4, -3 )
+
+[node name="LegCollider" type="CollisionPolygon2D" parent="."]
+position = Vector2( -2, -1 )
+polygon = PoolVector2Array( -1, 4, 4, 4, 4, 1, -1, 1, -1, 4, -1, 4 )
+
+[node name="Head" type="Area2D" parent="."]
+position = Vector2( -6, -1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
+position = Vector2( 6, -7 )
+shape = SubResource( 2 )
+
+[node name="Body" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body"]
+polygon = PoolVector2Array( -4, -4, -4, -1, -4, 0, 4, 0, 4, -4 )
+
+[node name="Legs" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Legs"]
+position = Vector2( 0, -1 )
+polygon = PoolVector2Array( 3, 1, 2, 4, -3, 4, -4, 1 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2( 0, 2 )
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PoolVector2Array( -4, -8, 4, -8, 4, 1, -4, 1 )
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_left = -13.0
+margin_top = -17.0
+margin_right = 73.0
+margin_bottom = -3.0
+rect_scale = Vector2( 0.316911, 0.316911 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Legsnap" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="MeatHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+volume_db = 3.212
+
+[node name="zombieBody" type="Sprite" parent="."]
+position = Vector2( 0, -1 )
+texture = ExtResource( 2 )
+
+[node name="zombieHead" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -9 )
+texture = ExtResource( 6 )
+
+[node name="zombieHead2" type="Sprite" parent="."]
+position = Vector2( -0.251661, -8.10786 )
+scale = Vector2( -0.07935, 0.0633558 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 73, 58, 156, 162 )
+
+[node name="openMouthHead" type="Sprite" parent="."]
+visible = false
+position = Vector2( -0.201872, -9.30279 )
+scale = Vector2( -0.07935, 0.0633558 )
+texture = ExtResource( 8 )
+region_enabled = true
+region_rect = Rect2( 73, 58, 156, 162 )
+
+[node name="bloodParticles" parent="." instance=ExtResource( 10 )]
+
+[node name="deadHead" type="Sprite" parent="."]
+visible = false
+position = Vector2( -0.25166, -7.9336 )
+scale = Vector2( -0.07935, 0.0633558 )
+texture = ExtResource( 9 )
+region_enabled = true
+region_rect = Rect2( 73, 58, 156, 162 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Detection" type="Area2D" parent="."]
+
+[node name="DetectionSphere" type="CollisionShape2D" parent="Detection"]
+shape = SubResource( 3 )
+[connection signal="area_entered" from="Head" to="." method="_on_Head_area_entered"]
+[connection signal="area_entered" from="Body" to="." method="_on_Body_area_entered"]
+[connection signal="area_entered" from="Legs" to="." method="_on_Legs_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="Detection" to="." method="_on_Detection_body_entered"]
+[connection signal="body_exited" from="Detection" to="." method="_on_Detection_body_exited"]
