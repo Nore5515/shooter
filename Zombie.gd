@@ -137,7 +137,7 @@ func hideAll():
 func _on_Head_area_entered(area):
 	if area.is_in_group("bullet") && !headshotted:
 		if area.ACTIVE:
-			HP -= 90
+			HP -= 115
 			area.queue_free()
 			$MeatHit.play()
 			if HP <= 0:

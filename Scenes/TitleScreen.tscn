@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Images/titleBG.ogv" type="VideoStream" id=1]
+[ext_resource path="res://Images/wagh.ogv" type="VideoStream" id=1]
 [ext_resource path="res://8bitFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scenes/Panel.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/TitleScreen.gd" type="Script" id=4]
@@ -9,11 +9,10 @@
 script = ExtResource( 4 )
 
 [node name="VideoPlayer" type="VideoPlayer" parent="."]
-margin_left = -300.0
-margin_top = -177.0
-margin_right = 516.0
-margin_bottom = 255.0
-rect_scale = Vector2( 0.788209, 0.875674 )
+margin_top = -9.0
+margin_right = 1920.0
+margin_bottom = 1079.0
+rect_scale = Vector2( 0.528839, 0.576823 )
 stream = ExtResource( 1 )
 autoplay = true
 expand = false

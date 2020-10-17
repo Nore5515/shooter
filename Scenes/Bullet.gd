@@ -5,6 +5,7 @@ var speed = 13
 var dest
 var passedDest = false
 
+
 var ACTIVE = false
 
 func _process(_delta):

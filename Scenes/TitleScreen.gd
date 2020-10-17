@@ -8,4 +8,6 @@ func _ready():
 
 
 func _on_VideoPlayer_finished():
+	print ("new")
 	$VideoPlayer.play()
+
