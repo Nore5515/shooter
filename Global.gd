@@ -9,11 +9,13 @@ var bestTimeTrial2Time = "N/A"
 var bestTargetSpeedrunTime = "N/A"
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+export (int) var cash = 1000
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
+### PISTOL
+var pistolSize = 8
+var pistolUpgradeCosts = [10,20,30,40,50,60,70,80,90,100,110,120,130,140,150]
+
+var pistolAuto = false
+var pistolAutoCost = [100]

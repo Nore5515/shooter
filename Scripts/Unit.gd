@@ -9,11 +9,15 @@ var arActive = false
 export (int) var pistolAmmoReserves = 10
 export (int) var pistolAmmo = 12
 var maxPistolAmmo = 12
+var pistolFiring = false
 
 export (int) var arAmmoReserves = 30
 export (int) var arAmmo = 30
 var maxARAmmo = 30
 var arFiring = false
+
+var pistolCooldown = 1
+var pistolCooldownMax = 2
 
 var arCooldown = 1
 var arCooldownMax = 6
@@ -36,7 +40,8 @@ var dead = false
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-
+	maxPistolAmmo = get_node("/root/Global").pistolSize
+	pistolAmmo = maxPistolAmmo
 
 func die():
 	if !dead:
@@ -105,6 +110,32 @@ func _process(_delta):
 					
 					arAmmo -= 1
 	
+		if pistolFiring:
+			if pistolCooldown > 0:
+				pistolCooldown -= 1
+			else:
+				if pistolAmmo > 0:
+					pistolCooldown = pistolCooldownMax
+					var bulletInstance = load("res://Scenes/Bullet.tscn").instance()
+					get_parent().add_child(bulletInstance)
+					bulletInstance.global_position = $HandPivot/Pistol.global_position
+					bulletInstance.look_at(get_parent().get_node("AimingReticle").global_position)
+					#bulletInstance.look_at(get_parent().get_node("AimingReticle").getPointInSquare())
+					bulletInstance.rotate( (  randf() * (recoil*2)  )    - recoil)
+					bulletInstance.dest = get_parent().get_node("AimingReticle").global_position
+					
+					$ReloadBar/PistolShootSound.stop()
+					$ReloadBar/PistolShootSound.play()
+					
+					for zombie in get_tree().get_nodes_in_group("zombie"):
+						zombie.hearGunshot(self.global_position)
+					
+					get_parent().get_node("AimingReticle").recoilReticle(0.65)
+					recoil += 0.35
+					
+					pistolAmmo -= 1
+				
+	
 		#print (recoil)
 		recoil = lerp(0.0, recoil, 0.80)
 	
@@ -162,6 +193,8 @@ func _input(event):
 	
 		if event.is_action_pressed("1"):
 			pistolActive = true
+			pistolFiring = false
+			pistolCooldown = 1
 			arActive = false
 			arFiring = false
 			arCooldown = 1
@@ -172,6 +205,8 @@ func _input(event):
 			# maybe add a "all false" for better scaling
 		elif event.is_action_pressed("2"):
 			pistolActive = false
+			pistolFiring = false
+			pistolCooldown = 1
 			arActive = true
 			arFiring = false
 			arCooldown = 1
@@ -183,7 +218,15 @@ func _input(event):
 		elif event.is_action_pressed("click"):
 			
 			if pistolActive:
-				if pistolAmmo > 0:
+				
+				if get_node("/root/Global").pistolAuto && pistolAmmo > 0:
+					pistolFiring = true
+					pistolCooldown = 0 
+				elif get_node("/root/Global").pistolAuto && pistolAmmo <= 0:
+					# CLICK! No ammo.
+					$ReloadBar/PistolClick.play()
+				
+				if pistolAmmo > 0 && !get_node("/root/Global").pistolAuto:
 					var bulletInstance = load("res://Scenes/Bullet.tscn").instance()
 					get_parent().add_child(bulletInstance)
 					bulletInstance.global_position = $HandPivot/Pistol.global_position
@@ -202,23 +245,26 @@ func _input(event):
 					recoil += 0.35
 					
 					pistolAmmo -= 1
-					
-				
 				else:
 					# CLICK! No ammo.
-					$ReloadBar/PistolClick.play()
+					if get_node("/root/Global").pistolAuto == false:
+						$ReloadBar/PistolClick.play()
 					
 			elif arActive:
 				
 				arFiring = true
+				arCooldown = 0
 				
 				if arAmmo <= 0:
 					# CLICK! No ammo.
 					$ReloadBar/PistolClick.play()
+					$HandPivot/ARwithMag.visible = false
 		
 		elif event.is_action_released("click"):
 			if arActive:
 				arFiring = false
+			if pistolActive:
+				pistolFiring = false
 		
 		
 		elif event.is_action_pressed("reload"):

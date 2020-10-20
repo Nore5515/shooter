@@ -54,9 +54,6 @@ func _on_TargetTimeTrial2_pressed():
 		$BestTime.text = "Best Time Remaining: " + String(\
 			get_node("/root/Global").bestTimeTrial2Time)
 
-func _on_Button_pressed():
-	visible = !visible
-
 
 func _on_Start_pressed():
 	if tut:
@@ -114,3 +111,7 @@ func _on_Zombies2_pressed():
 		$ScenarioPic.texture = load("res://Images/zombieTownScreenshot.PNG")
 		$BestTime.text = "Best Time: " + String(\
 			get_node("/root/Global").bestZombiesTime)
+
+
+func _on_Shop_pressed():
+	pass # Replace with function body.

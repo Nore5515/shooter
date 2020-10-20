@@ -17,6 +17,10 @@ var playerPos = Vector2()
 
 export (bool) var idleZombie = false
 
+export (bool) var bigbrainZombieMoving = false
+var navDest
+var lastNav
+
 var lastSceenPos = Vector2()
 
 var moving = true
@@ -27,6 +31,7 @@ var yelling = false
 
 func _ready():
 	lastSceenPos = position
+	navDest = global_position
 
 func _process(delta):
 	moving = true
@@ -49,9 +54,15 @@ func _process(delta):
 				moving = false
 
 	if moving:
-		var collision = move_and_collide(global_position.direction_to(playerPos) * speed * delta)
-	#if collision:
-		#print (collision.collider.name)
+		if bigbrainZombieMoving == false:
+			var collision = move_and_collide(global_position.direction_to(playerPos) * speed * delta)
+		else:
+			# have the zombie pathfind if out of range (range being like 100)
+			if self.global_position.distance_to(playerPos) < 100:
+				var collision = move_and_collide(global_position.direction_to(playerPos) * speed * delta)
+			else:
+				var collision = move_and_collide(global_position.direction_to(navDest) * speed * delta)
+
 
 	if legsHP <= 0 && legsBroken == false:
 		$Legsnap.play()
@@ -66,6 +77,7 @@ func _process(delta):
 				get_parent().add_child(crateInstance)
 		var soundInstance = load("res://Scenes/Deathsound.tscn").instance()
 		get_parent().add_child(soundInstance)
+		get_node("/root/Global").cash += 1
 		queue_free()
 
 	if global_position.direction_to(playerPos).x > 0:
@@ -169,6 +181,7 @@ func _on_Timer_timeout():
 				get_parent().add_child(crateInstance)
 	var soundInstance = load("res://Scenes/Deathsound.tscn").instance()
 	get_parent().add_child(soundInstance)
+	get_node("/root/Global").cash += 2
 	queue_free()
 
 

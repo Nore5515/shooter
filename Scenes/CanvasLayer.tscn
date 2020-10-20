@@ -48,3 +48,13 @@ __meta__ = {
 }
 
 [node name="Stopwatch" type="Timer" parent="TimerCount"]
+
+[node name="finalTime" type="Label" parent="."]
+margin_left = 1110.0
+margin_top = -172.0
+margin_right = 1155.0
+margin_bottom = -158.0
+rect_scale = Vector2( 2.28993, 2.27798 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
