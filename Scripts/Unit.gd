@@ -93,6 +93,10 @@ func _process(_delta):
 					arCooldown = arCooldownMax
 					var bulletInstance = load("res://Scenes/Bullet.tscn").instance()
 					get_parent().add_child(bulletInstance)
+					bulletInstance.damage = get_node("/root/Global").arDamage
+					bulletInstance.headshotMultiplier = get_node("/root/Global").arHeadshotMultiplier
+					bulletInstance.crippleMultiplier = get_node("/root/Global").arCrippleMultiplier
+					bulletInstance.cripplePenalty = get_node("/root/Global").arCripplePenalty
 					bulletInstance.global_position = $HandPivot/Pistol.global_position
 					bulletInstance.look_at(get_parent().get_node("AimingReticle").global_position)
 					#bulletInstance.look_at(get_parent().get_node("AimingReticle").getPointInSquare())
@@ -118,6 +122,10 @@ func _process(_delta):
 					pistolCooldown = pistolCooldownMax
 					var bulletInstance = load("res://Scenes/Bullet.tscn").instance()
 					get_parent().add_child(bulletInstance)
+					bulletInstance.damage = get_node("/root/Global").pistolDamage
+					bulletInstance.headshotMultiplier = get_node("/root/Global").pistolHeadshotMultiplier
+					bulletInstance.crippleMultiplier = get_node("/root/Global").pistolCrippleMultiplier
+					bulletInstance.cripplePenalty = get_node("/root/Global").pistolCripplePenalty
 					bulletInstance.global_position = $HandPivot/Pistol.global_position
 					bulletInstance.look_at(get_parent().get_node("AimingReticle").global_position)
 					#bulletInstance.look_at(get_parent().get_node("AimingReticle").getPointInSquare())
@@ -229,6 +237,10 @@ func _input(event):
 				if pistolAmmo > 0 && !get_node("/root/Global").pistolAuto:
 					var bulletInstance = load("res://Scenes/Bullet.tscn").instance()
 					get_parent().add_child(bulletInstance)
+					bulletInstance.damage = get_node("/root/Global").pistolDamage
+					bulletInstance.headshotMultiplier = get_node("/root/Global").pistolHeadshotMultiplier
+					bulletInstance.crippleMultiplier = get_node("/root/Global").pistolCrippleMultiplier
+					bulletInstance.cripplePenalty = get_node("/root/Global").pistolCripplePenalty
 					bulletInstance.global_position = $HandPivot/Pistol.global_position
 					bulletInstance.look_at(get_parent().get_node("AimingReticle").global_position)
 					#bulletInstance.look_at(get_parent().get_node("AimingReticle").getPointInSquare())

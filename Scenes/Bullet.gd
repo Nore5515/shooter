@@ -6,6 +6,12 @@ var dest
 var passedDest = false
 
 
+var damage = 20
+var headshotMultiplier = 4
+var crippleMultiplier = 2
+var cripplePenalty = 0.5
+
+
 var ACTIVE = false
 
 func _process(_delta):
@@ -28,7 +34,7 @@ func _process(_delta):
 func _on_Bullet_body_entered(body):
 	if body.is_in_group("target"):
 		if ACTIVE:
-			if body.strikeByBullet():
+			if body.strikeByBullet(damage):
 				queue_free()
 	elif body.is_in_group("obstacle"):
 		queue_free()

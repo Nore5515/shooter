@@ -94,8 +94,8 @@ func _process(delta):
 		yelling = false
 		if !legsBroken:
 			speed = 25
-		
-		
+
+
 	hideAll()
 	
 	if headshotted:
@@ -149,7 +149,7 @@ func hideAll():
 func _on_Head_area_entered(area):
 	if area.is_in_group("bullet") && !headshotted:
 		if area.ACTIVE:
-			HP -= 115
+			HP -= area.damage * area.headshotMultiplier
 			area.queue_free()
 			$MeatHit.play()
 			if HP <= 0:
@@ -160,15 +160,15 @@ func _on_Head_area_entered(area):
 func _on_Body_area_entered(area):
 	if area.is_in_group("bullet") && !headshotted:
 		if area.ACTIVE:
-			HP -= 15
+			HP -= area.damage
 			area.queue_free()
 			$MeatHit.play()
 
 func _on_Legs_area_entered(area):
 	if area.is_in_group("bullet") && !headshotted:
 		if area.ACTIVE:
-			HP -= 5
-			legsHP -= 25
+			HP -= area.damage * area.cripplePenalty
+			legsHP -= area.damage * area.crippleMultiplier
 			area.queue_free()
 			$MeatHit.play()
 
