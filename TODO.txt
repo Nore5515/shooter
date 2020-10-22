@@ -1,0 +1,10 @@
+
+the bullet needs to only hit one zombie at a time
+this could be done by having the bullet handle collision, not the zombie
+
+the bullet, upon detection, creates a list of collisions, and waits a frame
+then it disables collision (to flush any collisions) and waits antoher frame
+THEN, after 2 frames, it sends the "hit" to the first zombie, and kills itself.
+BLAMMO! ez pz.
+
+prob...

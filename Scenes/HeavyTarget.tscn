@@ -11,7 +11,7 @@ radius = 5.0
 "target",
 ]]
 script = ExtResource( 2 )
-HP = 3
+HP = 30
 
 [node name="target" type="Sprite" parent="."]
 modulate = Color( 0.631373, 0.576471, 0.215686, 1 )

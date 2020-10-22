@@ -1,20 +1,21 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Images/titleBG.ogv" type="VideoStream" id=1]
+[ext_resource path="res://Images/wagh.ogv" type="VideoStream" id=1]
 [ext_resource path="res://8bitFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scenes/Panel.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/TitleScreen.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Shop.gd" type="Script" id=5]
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource( 4 )
 
 [node name="VideoPlayer" type="VideoPlayer" parent="."]
-margin_left = -300.0
-margin_top = -177.0
-margin_right = 516.0
-margin_bottom = 255.0
-rect_scale = Vector2( 0.788209, 0.875674 )
+margin_top = -9.0
+margin_right = 1920.0
+margin_bottom = 1079.0
+rect_scale = Vector2( 0.528839, 0.576823 )
 stream = ExtResource( 1 )
+volume_db = -80.0
 autoplay = true
 expand = false
 __meta__ = {
@@ -32,6 +33,122 @@ text = "UNTITLED SHOOTER"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Shop" type="Button" parent="."]
+margin_left = 431.0
+margin_top = 214.0
+margin_right = 489.0
+margin_bottom = 234.0
+rect_scale = Vector2( 2.46057, 2.46057 )
+custom_fonts/font = ExtResource( 2 )
+text = "SHOP"
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemSelect" type="Panel" parent="Shop"]
+margin_left = -109.324
+margin_top = 23.9782
+margin_right = 173.0
+margin_bottom = 125.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/ItemSelect"]
+margin_right = 95.0
+margin_bottom = 102.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pistol" type="Button" parent="Shop/ItemSelect/VBoxContainer"]
+margin_right = 95.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 2 )
+text = "PISTOL"
+
+[node name="AR" type="Button" parent="Shop/ItemSelect/VBoxContainer"]
+margin_top = 22.0
+margin_right = 95.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 2 )
+text = "AR"
+
+[node name="ItemDesc" type="Label" parent="Shop/ItemSelect"]
+margin_left = 95.0999
+margin_right = 266.0
+margin_bottom = 122.0
+rect_scale = Vector2( 0.460922, 0.460922 )
+custom_fonts/font = ExtResource( 2 )
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PistolDetails" type="Panel" parent="Shop/ItemSelect"]
+margin_left = 175.163
+margin_right = 281.0
+margin_bottom = 99.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/ItemSelect/PistolDetails"]
+margin_right = 27.0
+margin_bottom = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pistolDamage" type="Button" parent="Shop/ItemSelect/PistolDetails/VBoxContainer"]
+margin_right = 50.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 2 )
+text = "dmg"
+
+[node name="pistolClip" type="Button" parent="Shop/ItemSelect/PistolDetails/VBoxContainer"]
+margin_top = 22.0
+margin_right = 50.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 2 )
+text = "clip"
+
+[node name="pistolAuto" type="Button" parent="Shop/ItemSelect/PistolDetails/VBoxContainer"]
+margin_top = 44.0
+margin_right = 50.0
+margin_bottom = 62.0
+custom_fonts/font = ExtResource( 2 )
+text = "auto"
+
+[node name="pistolConfirm" type="Button" parent="Shop/ItemSelect/PistolDetails"]
+margin_left = 49.9884
+margin_top = 80.8756
+margin_right = 107.0
+margin_bottom = 100.876
+custom_fonts/font = ExtResource( 2 )
+text = "Buy!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pistolUpradeDetails" type="Label" parent="Shop/ItemSelect/PistolDetails"]
+margin_left = 50.3948
+margin_right = 157.0
+margin_bottom = 107.0
+rect_scale = Vector2( 0.535841, 0.741065 )
+custom_fonts/font = ExtResource( 2 )
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemPic" type="TextureRect" parent="Shop/ItemSelect"]
+margin_left = 95.0999
+margin_top = 54.8653
+margin_right = 175.0
+margin_bottom = 100.0
 
 [node name="Begin" type="Button" parent="."]
 margin_left = 431.0
@@ -179,8 +296,24 @@ text = "QUIT"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Cash" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+rect_scale = Vector2( 2.23267, 2.23267 )
+custom_fonts/font = ExtResource( 2 )
+text = "0$"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="finished" from="VideoPlayer" to="." method="_on_VideoPlayer_finished"]
-[connection signal="pressed" from="Begin" to="Begin/Panel" method="_on_Button_pressed"]
+[connection signal="pressed" from="Shop" to="." method="_on_Shop_pressed"]
+[connection signal="pressed" from="Shop/ItemSelect/VBoxContainer/Pistol" to="Shop" method="_on_Pistol_pressed"]
+[connection signal="pressed" from="Shop/ItemSelect/PistolDetails/VBoxContainer/pistolDamage" to="Shop" method="_on_pistolDamage_pressed"]
+[connection signal="pressed" from="Shop/ItemSelect/PistolDetails/VBoxContainer/pistolClip" to="Shop" method="_on_pistolClip_pressed"]
+[connection signal="pressed" from="Shop/ItemSelect/PistolDetails/VBoxContainer/pistolAuto" to="Shop" method="_on_pistolAuto_pressed"]
+[connection signal="pressed" from="Shop/ItemSelect/PistolDetails/pistolConfirm" to="Shop" method="_on_pistolConfirm_pressed"]
+[connection signal="pressed" from="Begin" to="." method="_on_Begin_pressed"]
 [connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/Tutorial" to="Begin/Panel" method="_on_Tutorial_pressed"]
 [connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/TargetSpeedrun" to="Begin/Panel" method="_on_TargetSpeedrun_pressed"]
 [connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/TargetTimeTrial2" to="Begin/Panel" method="_on_TargetTimeTrial2_pressed"]
