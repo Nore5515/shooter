@@ -10,9 +10,6 @@
 [ext_resource path="res://Images/bg.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/TimerCount.gd" type="Script" id=9]
 
-
-
-
 [node name="TargetSpeedrun" type="Node2D"]
 
 [node name="bg" type="Sprite" parent="."]
@@ -51,6 +48,48 @@ position = Vector2( -117, 0 )
 
 [node name="AimingReticle" parent="." instance=ExtResource( 1 )]
 position = Vector2( 8, 0 )
+
+[node name="Rock" parent="." instance=ExtResource( 4 )]
+position = Vector2( -56, -21 )
+
+[node name="Rock2" parent="." instance=ExtResource( 4 )]
+position = Vector2( -127, -46 )
+
+[node name="Rock3" parent="." instance=ExtResource( 4 )]
+position = Vector2( -138, -36 )
+
+[node name="Rock4" parent="." instance=ExtResource( 4 )]
+position = Vector2( -67, 40 )
+
+[node name="Rock5" parent="." instance=ExtResource( 4 )]
+position = Vector2( -207, -85 )
+
+[node name="Rock6" parent="." instance=ExtResource( 4 )]
+position = Vector2( -194, -79 )
+
+[node name="Rock7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 103, -111 )
+
+[node name="Rock8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 93, -97 )
+
+[node name="Crate" parent="." instance=ExtResource( 3 )]
+position = Vector2( -34, -51 )
+
+[node name="Crate2" parent="." instance=ExtResource( 3 )]
+position = Vector2( -207, -54 )
+
+[node name="Crate3" parent="." instance=ExtResource( 3 )]
+position = Vector2( -150, 57 )
+
+[node name="Crate4" parent="." instance=ExtResource( 3 )]
+position = Vector2( -158, 57 )
+
+[node name="Crate5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 68, 37 )
+
+[node name="Unit" parent="." instance=ExtResource( 6 )]
+position = Vector2( -1, -2 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -100,44 +139,12 @@ targetLevel = true
 
 [node name="Stopwatch" type="Timer" parent="CanvasLayer/TimerCount"]
 
-[node name="Rock" parent="." instance=ExtResource( 4 )]
-position = Vector2( -56, -21 )
-
-[node name="Rock2" parent="." instance=ExtResource( 4 )]
-position = Vector2( -127, -46 )
-
-[node name="Rock3" parent="." instance=ExtResource( 4 )]
-position = Vector2( -138, -36 )
-
-[node name="Rock4" parent="." instance=ExtResource( 4 )]
-position = Vector2( -67, 40 )
-
-[node name="Rock5" parent="." instance=ExtResource( 4 )]
-position = Vector2( -207, -85 )
-
-[node name="Rock6" parent="." instance=ExtResource( 4 )]
-position = Vector2( -194, -79 )
-
-[node name="Rock7" parent="." instance=ExtResource( 4 )]
-position = Vector2( 103, -111 )
-
-[node name="Rock8" parent="." instance=ExtResource( 4 )]
-position = Vector2( 93, -97 )
-
-[node name="Crate" parent="." instance=ExtResource( 3 )]
-position = Vector2( -34, -51 )
-
-[node name="Crate2" parent="." instance=ExtResource( 3 )]
-position = Vector2( -207, -54 )
-
-[node name="Crate3" parent="." instance=ExtResource( 3 )]
-position = Vector2( -150, 57 )
-
-[node name="Crate4" parent="." instance=ExtResource( 3 )]
-position = Vector2( -158, 57 )
-
-[node name="Crate5" parent="." instance=ExtResource( 3 )]
-position = Vector2( 68, 37 )
-
-[node name="Unit" parent="." instance=ExtResource( 6 )]
-position = Vector2( -1, -2 )
+[node name="finalTime" type="Label" parent="CanvasLayer"]
+margin_left = 1110.0
+margin_top = -172.0
+margin_right = 1155.0
+margin_bottom = -158.0
+rect_scale = Vector2( 2.28993, 2.27798 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
