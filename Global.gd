@@ -20,6 +20,8 @@ var pistolAuto = false
 var pistolAutoCost = [100]
 
 var pistolDamage = 20
+var pistolDamageUpgradeCosts = [50,100,200]
+var pistolDamageUpgradeAmount = 5
 var pistolHeadshotMultiplier = 4
 var pistolCrippleMultiplier = 1
 var pistolCripplePenalty = 0.5

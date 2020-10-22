@@ -4,7 +4,7 @@ extends Button
 
 var pistolClipUpgrade = false
 var pistolAutoUpgrade = false
-
+var pistolDamageUpgrade = false
 
 
 func hideAll():
@@ -15,6 +15,7 @@ func hideAll():
 func toggleAll():
 	pistolClipUpgrade = false
 	pistolAutoUpgrade = false
+	pistolDamageUpgrade = false
 
 
 func _on_Pistol_pressed():
@@ -28,13 +29,20 @@ func _on_Pistol_pressed():
 
 
 func _on_pistolDamage_pressed():
+	var txt
 	toggleAll()
 	if $ItemSelect/PistolDetails/pistolUpradeDetails.text == "":
-		$ItemSelect/PistolDetails/pistolUpradeDetails.text = "DAMAGE: damage is WIP."
-	elif $ItemSelect/PistolDetails/pistolUpradeDetails.text == "DAMAGE: damage is WIP.":
-		$ItemSelect/PistolDetails/pistolUpradeDetails.text = ""
+		txt = "The current pistol damage is: " + String(get_node("/root/Global").pistolDamage)
+		if get_node("/root/Global").pistolDamageUpgradeCosts.size() > 0:
+			txt += "\nUpgrading it costs..." + String(get_node("/root/Global").pistolDamageUpgradeCosts[0])
+			pistolDamageUpgrade = true
+		$ItemSelect/PistolDetails/pistolUpradeDetails.text = txt
 	else:
-		$ItemSelect/PistolDetails/pistolUpradeDetails.text = "DAMAGE: damage is WIP."
+		txt = "The current pistol damage is: " + String(get_node("/root/Global").pistolDamage)
+		if get_node("/root/Global").pistolDamageUpgradeCosts.size() > 0:
+			txt += "\nUpgrading it costs..." + String(get_node("/root/Global").pistolDamageUpgradeCosts[0])
+			pistolDamageUpgrade = true
+		$ItemSelect/PistolDetails/pistolUpradeDetails.text = txt
 		
 
 
@@ -48,8 +56,6 @@ func _on_pistolClip_pressed():
 			txt += String(get_node("/root/Global").pistolUpgradeCosts[0])
 			pistolClipUpgrade = true
 		$ItemSelect/PistolDetails/pistolUpradeDetails.text = txt
-	elif $ItemSelect/PistolDetails/pistolUpradeDetails.text == "Clip is WIP too..":
-		$ItemSelect/PistolDetails/pistolUpradeDetails.text = ""
 	else:
 		var txt = "The current pistol clip size is: " + String(get_node("/root/Global").pistolSize)
 		txt += "\nIt currently costs..."
@@ -70,8 +76,6 @@ func _on_pistolAuto_pressed():
 		if get_node("/root/Global").pistolAuto == false:
 			pistolAutoUpgrade = true
 		$ItemSelect/PistolDetails/pistolUpradeDetails.text = details
-	elif $ItemSelect/PistolDetails/pistolUpradeDetails.text == details:
-		$ItemSelect/PistolDetails/pistolUpradeDetails.text = ""
 	else:
 		if get_node("/root/Global").pistolAuto == false:
 			pistolAutoUpgrade = true
@@ -91,3 +95,9 @@ func _on_pistolConfirm_pressed():
 			get_node("/root/Global").pistolUpgradeCosts.pop_front()
 			get_node("/root/Global").pistolAuto = true
 			_on_pistolAuto_pressed()
+	elif pistolDamageUpgrade:
+		if get_node("/root/Global").cash >= get_node("/root/Global").pistolDamageUpgradeCosts[0]:
+			get_node("/root/Global").cash -= get_node("/root/Global").pistolDamageUpgradeCosts[0]
+			get_node("/root/Global").pistolDamageUpgradeCosts.pop_front()
+			get_node("/root/Global").pistolDamage += get_node("/root/Global").pistolDamageUpgradeAmount
+			_on_pistolDamage_pressed()
