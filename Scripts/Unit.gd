@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 
 
+var meleeReady = true
+var meleeReadyZombies = []
 
 var pistolActive = true
 var arActive = false
@@ -289,6 +291,21 @@ func _input(event):
 					$ReloadBar/PistolClick.play()
 					$HandPivot/ARwithMag.visible = false
 		
+		
+		elif event.is_action_pressed("melee"):
+			if meleeReady == true:
+				meleeReady = false
+				$HandPivot/meleeSwipe.visible = true
+				$meleeTime.start()
+				$meleeDelay.start()
+				
+				for zomb in meleeReadyZombies:
+					zomb.knockback(get_node("/root/Global").meleeKnockback, global_position)
+					zomb.HP -= get_node("/root/Global").meleeDamage
+					if zomb.HP <= 0:
+						zomb.headshotted = true
+						zomb.get_node("Timer").start()
+		
 		elif event.is_action_released("click"):
 			if arActive:
 				arFiring = false
@@ -401,3 +418,30 @@ func _on_deathTimer_timeout():
 
 func _on_Pistol_animation_finished():
 	$HandPivot/Pistol.play("default")
+
+
+func _on_meleeTime_timeout():
+	meleeReady = true
+
+
+func _on_meleeDelay_timeout():
+	$HandPivot/meleeSwipe.visible = false
+
+
+# MELEE HIT
+func _on_Area2D_body_entered(body):
+	if $HandPivot/meleeSwipe.visible == true:
+		if body.is_in_group("zombie"):
+			body.HP -= get_node("/root/Global").meleeDamage
+			if body.HP <= 0:
+				body.headshotted = true
+				body.get_node("Timer").start()
+			body.knockback(get_node("/root/Global").meleeKnockback, global_position)
+	
+	if body.is_in_group("zombie"):
+		meleeReadyZombies.append(body)
+
+
+func _on_Area2D_body_exited(body):
+	if body.is_in_group("zombie"):
+		meleeReadyZombies.erase(body)

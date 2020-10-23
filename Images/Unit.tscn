@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/Unit.gd" type="Script" id=1]
 [ext_resource path="res://Images/playerHead.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Images/newSTUFF/pistolFire/pistol2.png" type="Texture" id=14]
 [ext_resource path="res://Images/newSTUFF/pistolFire/pistol3.png" type="Texture" id=15]
 [ext_resource path="res://Images/newSTUFF/pistolFire/pistol1.png" type="Texture" id=16]
+[ext_resource path="res://Images/newSTUFF/meleeSwipe.png" type="Texture" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3, 3 )
@@ -72,6 +73,19 @@ frame = 1
 [node name="BulletPoint" type="Node2D" parent="HandPivot/Pistol"]
 position = Vector2( 36.6476, -82.9023 )
 scale = Vector2( 29.6795, 34.1601 )
+
+[node name="meleeSwipe" type="Sprite" parent="HandPivot"]
+visible = false
+position = Vector2( 8, -2 )
+scale = Vector2( 0.0186527, 0.0322345 )
+texture = ExtResource( 17 )
+
+[node name="Area2D" type="Area2D" parent="HandPivot/meleeSwipe"]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HandPivot/meleeSwipe/Area2D"]
+polygon = PoolVector2Array( -107.223, -217.159, 107.223, -155.114, 214.447, 31.0227, 53.6117, 217.159, -375.282, 248.182, -375.282, 62.0454, -375.282, -155.114 )
 
 [node name="ReloadBar" type="ProgressBar" parent="."]
 visible = false
@@ -133,6 +147,18 @@ texture = ExtResource( 13 )
 position = Vector2( 1, 9.53674e-07 )
 scale = Vector2( 0.04, 0.04 )
 texture = ExtResource( 12 )
+
+[node name="meleeTime" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="meleeDelay" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
 [connection signal="animation_finished" from="HandPivot/Pistol" to="." method="_on_Pistol_animation_finished"]
+[connection signal="body_entered" from="HandPivot/meleeSwipe/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="HandPivot/meleeSwipe/Area2D" to="." method="_on_Area2D_body_exited"]
 [connection signal="timeout" from="ReloadBar/ReloadTime" to="." method="_on_ReloadTime_timeout"]
 [connection signal="timeout" from="deathTimer" to="." method="_on_deathTimer_timeout"]
+[connection signal="timeout" from="meleeTime" to="." method="_on_meleeTime_timeout"]
+[connection signal="timeout" from="meleeDelay" to="." method="_on_meleeDelay_timeout"]

@@ -9,6 +9,7 @@ var pistolDamageUpgrade = false
 
 func hideAll():
 	$ItemSelect/PistolDetails.visible = false
+	$ItemSelect/MeleeDetails.visible = false
 	$ItemSelect/ItemDesc.text = ""
 
 
@@ -101,3 +102,13 @@ func _on_pistolConfirm_pressed():
 			get_node("/root/Global").pistolDamageUpgradeCosts.pop_front()
 			get_node("/root/Global").pistolDamage += get_node("/root/Global").pistolDamageUpgradeAmount
 			_on_pistolDamage_pressed()
+
+
+func _on_Melee_pressed():
+	if $ItemSelect/MeleeDetails.visible == true:
+		hideAll()
+	else:
+		hideAll()
+		$ItemSelect/MeleeDetails.visible = true
+		$ItemSelect/ItemDesc.text = "Although typically used as an emergency backup, a well trained melee specialist can be a nightmare to their enemies."
+

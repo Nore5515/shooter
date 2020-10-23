@@ -27,6 +27,10 @@ var moving = true
 var relax = true
 var relax2 = true
 
+var movement = Vector2()
+var knockbackForce = Vector2()
+var knockingBack = false
+
 var yelling = false
 
 func _ready():
@@ -55,14 +59,24 @@ func _process(delta):
 
 	if moving:
 		if bigbrainZombieMoving == false:
-			var collision = move_and_collide(global_position.direction_to(playerPos) * speed * delta)
+			movement = global_position.direction_to(playerPos) * speed * delta
+			#var collision = move_and_collide(movement)
 		else:
 			# have the zombie pathfind if out of range (range being like 100)
 			if self.global_position.distance_to(playerPos) < 100:
-				var collision = move_and_collide(global_position.direction_to(playerPos) * speed * delta)
+				movement = global_position.direction_to(playerPos) * speed * delta
+				#var collision = move_and_collide(global_position.direction_to(playerPos) * speed * delta)
 			else:
-				var collision = move_and_collide(global_position.direction_to(navDest) * speed * delta)
-
+				movement = global_position.direction_to(navDest) * speed * delta
+				#var collision = move_and_collide(global_position.direction_to(navDest) * speed * delta)
+		
+		if knockingBack == true:
+			movement += knockbackForce
+			knockbackForce = lerp(knockbackForce, Vector2(0,0), 0.1)
+			if knockbackForce.length() < 1:
+				knockingBack = false
+				knockbackForce = Vector2(0,0)
+		move_and_collide(movement)
 
 	if legsHP <= 0 && legsBroken == false:
 		$Legsnap.play()
@@ -89,7 +103,7 @@ func _process(delta):
 	(get_tree().get_nodes_in_group("player")[0].global_position) < 30:
 		yelling = true
 		if !legsBroken:
-			speed = 40
+			speed = 40 + rand_range(-10,10)
 	else:
 		yelling = false
 		if !legsBroken:
@@ -163,6 +177,9 @@ func _on_Body_area_entered(area):
 			HP -= area.damage
 			area.queue_free()
 			$MeatHit.play()
+			if HP <= 0:
+				headshotted = true
+				$Timer.start()
 
 func _on_Legs_area_entered(area):
 	if area.is_in_group("bullet") && !headshotted:
@@ -222,3 +239,10 @@ func _on_rArm2_body_entered(body):
 	if body.is_in_group("player"):
 		if !headshotted:
 			body.die()
+
+
+func knockback(force, source):
+	var dir = global_position-source
+	dir = dir.clamped(force)
+	knockbackForce = dir
+	knockingBack = true

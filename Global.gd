@@ -19,6 +19,8 @@ var headColor
 var currentBody
 var bodyColor
 
+var meleeDamage = 80
+var meleeKnockback = 6
 
 
 ### PISTOL

@@ -26,6 +26,7 @@ func _ready():
 	heads.append(load("res://Images/playerParts/playerHead2.png"))
 	bodies.append(load("res://Images/playerParts/playerBody1.png"))
 	bodies.append(load("res://Images/playerParts/playerBody2.png"))
+	bodies.append(load("res://Images/playerParts/playerBody3.png"))
 	
 	updateParts()
 

@@ -28,24 +28,16 @@ script = ExtResource( 3 )
 position = Vector2( -16.0322, -1 )
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Head"]
-position = Vector2( 15, -9 )
-polygon = PoolVector2Array( -1.6179, -3.48995, 1.01057, -3.42882, 3.91411, -1.90064, 5.13666, 0.697265, 4.15862, 2.98954, 2.38593, 3.78419, -0.364796, 4.15095, -2.84045, 3.63137, -4.36863, 1.09459, -4.24637, -1.04486, -3.32947, -2.66473 )
-
 [node name="Body" type="Area2D" parent="."]
 position = Vector2( -11.0962, 0 )
 collision_layer = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body"]
-polygon = PoolVector2Array( 9.33253, -5.79608, 9.17168, 0.220128, 12.4854, 0.187956, 12.228, -5.95694 )
+polygon = PoolVector2Array( 5.43426, -13.6977, 8.45414, 3.15235, 14.1, 3.06482, 15.1066, -13.7852 )
 
 [node name="Legs" type="Area2D" parent="."]
 position = Vector2( -5.94864, 2.63812 )
 collision_layer = 2
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Legs"]
-position = Vector2( 1.12603, -1.06434 )
-polygon = PoolVector2Array( 6.21182, -1.45017, 8.30302, 1.57402, 1.99726, 1.57402, 2.86591, -1.35365 )
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false
