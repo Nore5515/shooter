@@ -42,13 +42,21 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	maxPistolAmmo = get_node("/root/Global").pistolSize
 	pistolAmmo = maxPistolAmmo
+	
+	$playerParts/playerHead1.texture = get_node("/root/Global").currentHead
+	$playerParts/playerBody1.texture = get_node("/root/Global").currentBody
+
+	$playerParts/playerHead1.modulate = get_node("/root/Global").headColor
+	$playerParts/playerBody1.modulate = get_node("/root/Global").bodyColor
+
+
 
 func die():
 	if !dead:
 		dead = true
 		$deathTimer.start()
 		$bloodParticles.visible = true
-		$playerHead.visible = false
+		$playerParts/playerHead1.visible = false
 		
 		if get_parent().has_node("CanvasLayer/finalTime"):
 			get_parent().get_node("CanvasLayer/finalTime").visible = true
@@ -97,7 +105,7 @@ func _process(_delta):
 					bulletInstance.headshotMultiplier = get_node("/root/Global").arHeadshotMultiplier
 					bulletInstance.crippleMultiplier = get_node("/root/Global").arCrippleMultiplier
 					bulletInstance.cripplePenalty = get_node("/root/Global").arCripplePenalty
-					bulletInstance.global_position = $HandPivot/Pistol.global_position
+					bulletInstance.global_position = $HandPivot/Pistol/BulletPoint.global_position
 					bulletInstance.look_at(get_parent().get_node("AimingReticle").global_position)
 					#bulletInstance.look_at(get_parent().get_node("AimingReticle").getPointInSquare())
 					bulletInstance.rotate( (  randf() * (recoil*2)  )    - recoil)
@@ -119,6 +127,7 @@ func _process(_delta):
 				pistolCooldown -= 1
 			else:
 				if pistolAmmo > 0:
+					$HandPivot/Pistol.play("fire")
 					pistolCooldown = pistolCooldownMax
 					var bulletInstance = load("res://Scenes/Bullet.tscn").instance()
 					get_parent().add_child(bulletInstance)
@@ -126,7 +135,7 @@ func _process(_delta):
 					bulletInstance.headshotMultiplier = get_node("/root/Global").pistolHeadshotMultiplier
 					bulletInstance.crippleMultiplier = get_node("/root/Global").pistolCrippleMultiplier
 					bulletInstance.cripplePenalty = get_node("/root/Global").pistolCripplePenalty
-					bulletInstance.global_position = $HandPivot/Pistol.global_position
+					bulletInstance.global_position = $HandPivot/Pistol/BulletPoint.global_position
 					bulletInstance.look_at(get_parent().get_node("AimingReticle").global_position)
 					#bulletInstance.look_at(get_parent().get_node("AimingReticle").getPointInSquare())
 					bulletInstance.rotate( (  randf() * (recoil*2)  )    - recoil)
@@ -152,15 +161,20 @@ func _process(_delta):
 			$HandPivot.rotation = directionToMouse.angle() * 1.1
 		$HandPivot.rotation = lerp($HandPivot.rotation, directionToMouse.angle(), 0.25)
 		
-		if $HandPivot/Pistol.global_position.x > global_position.x:
-			$HandPivot/Pistol.flip_v = false
-			$HandPivot/ARwithMag.flip_v = false
-			$HandPivot/ARwithoutMag.flip_v = false
+		if get_global_mouse_position().x > global_position.x:
+			#$HandPivot/Pistol.flip_v = false
+			#$HandPivot/ARwithMag.flip_v = false
+			#$HandPivot/ARwithoutMag.flip_v = false
+			
+			$HandPivot.scale = Vector2(1,1)
 		else:
-			$HandPivot/Pistol.flip_v = true
-			$HandPivot/ARwithMag.flip_v = true
-			$HandPivot/ARwithoutMag.flip_v = true
+			#$HandPivot/Pistol.flip_v = true
+			#$HandPivot/ARwithMag.flip_v = true
+			#$HandPivot/ARwithoutMag.flip_v = true
 	
+			$HandPivot.scale = Vector2(1,-1)
+			
+			
 		if reloading:
 			$ReloadBar.value = $ReloadBar/ReloadTime.wait_time - $ReloadBar/ReloadTime.time_left
 	
@@ -178,8 +192,10 @@ func _process(_delta):
 		# MOVEMENT STUFF
 		if left:
 			move_and_slide(Vector2.LEFT * speed)
+			$playerParts.scale = Vector2(1,1)
 		if right:
 			move_and_slide(Vector2.RIGHT * speed)
+			$playerParts.scale = Vector2(-1,1)
 		if up:
 			move_and_slide(Vector2.UP * speed)
 		if down:
@@ -235,13 +251,14 @@ func _input(event):
 					$ReloadBar/PistolClick.play()
 				
 				if pistolAmmo > 0 && !get_node("/root/Global").pistolAuto:
+					$HandPivot/Pistol.play("fire")
 					var bulletInstance = load("res://Scenes/Bullet.tscn").instance()
 					get_parent().add_child(bulletInstance)
 					bulletInstance.damage = get_node("/root/Global").pistolDamage
 					bulletInstance.headshotMultiplier = get_node("/root/Global").pistolHeadshotMultiplier
 					bulletInstance.crippleMultiplier = get_node("/root/Global").pistolCrippleMultiplier
 					bulletInstance.cripplePenalty = get_node("/root/Global").pistolCripplePenalty
-					bulletInstance.global_position = $HandPivot/Pistol.global_position
+					bulletInstance.global_position = $HandPivot/Pistol/BulletPoint.global_position
 					bulletInstance.look_at(get_parent().get_node("AimingReticle").global_position)
 					#bulletInstance.look_at(get_parent().get_node("AimingReticle").getPointInSquare())
 					bulletInstance.rotate( (  randf() * (recoil*2)  )    - recoil)
@@ -380,3 +397,7 @@ func _on_ReloadTime_timeout():
 
 func _on_deathTimer_timeout():
 	get_tree().change_scene("res://Scenes/TitleScreen.tscn")
+
+
+func _on_Pistol_animation_finished():
+	$HandPivot/Pistol.play("default")

@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Images/wagh.ogv" type="VideoStream" id=1]
 [ext_resource path="res://8bitFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scenes/Panel.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/TitleScreen.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Shop.gd" type="Script" id=5]
+[ext_resource path="res://Images/playerParts/playerHead1.png" type="Texture" id=6]
+[ext_resource path="res://Images/playerParts/playerBody1.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/CustomizePanel.gd" type="Script" id=8]
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource( 4 )
@@ -34,6 +37,126 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Customize" type="Button" parent="."]
+margin_left = 396.0
+margin_top = 297.0
+margin_right = 495.0
+margin_bottom = 325.0
+rect_scale = Vector2( 2.2165, 2.03473 )
+custom_fonts/font = ExtResource( 2 )
+text = "CUSTOMIZE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CustomizePanel" type="Panel" parent="Customize"]
+margin_left = 117.302
+margin_top = -73.7198
+margin_right = 267.0
+margin_bottom = 133.0
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="playerHead1" type="Sprite" parent="Customize/CustomizePanel"]
+position = Vector2( 60.9069, 73.7198 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 6 )
+
+[node name="playerBody1" type="Sprite" parent="Customize/CustomizePanel"]
+position = Vector2( 60.9069, 118.443 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 7 )
+
+[node name="headRSlider" type="HSlider" parent="Customize/CustomizePanel"]
+margin_left = 88.8789
+margin_top = 27.522
+margin_right = 240.074
+margin_bottom = 43.522
+rect_scale = Vector2( 0.357204, 0.357204 )
+max_value = 255.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="headGSlider" type="HSlider" parent="Customize/CustomizePanel"]
+margin_left = 88.8789
+margin_top = 42.7575
+margin_right = 240.074
+margin_bottom = 58.7575
+rect_scale = Vector2( 0.357204, 0.357204 )
+max_value = 255.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="headBSlider" type="HSlider" parent="Customize/CustomizePanel"]
+margin_left = 88.8789
+margin_top = 57.0099
+margin_right = 240.074
+margin_bottom = 73.0099
+rect_scale = Vector2( 0.357204, 0.357204 )
+max_value = 255.0
+
+[node name="bodyRSlider" type="HSlider" parent="Customize/CustomizePanel"]
+margin_left = 88.8789
+margin_top = 128.272
+margin_right = 240.074
+margin_bottom = 144.272
+rect_scale = Vector2( 0.357204, 0.357204 )
+max_value = 255.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bodyGSlider" type="HSlider" parent="Customize/CustomizePanel"]
+margin_left = 88.8789
+margin_top = 143.508
+margin_right = 240.074
+margin_bottom = 159.508
+rect_scale = Vector2( 0.357204, 0.357204 )
+max_value = 255.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bodyBSlider" type="HSlider" parent="Customize/CustomizePanel"]
+margin_left = 88.8789
+margin_top = 157.76
+margin_right = 240.074
+margin_bottom = 173.76
+rect_scale = Vector2( 0.357204, 0.357204 )
+max_value = 255.0
+
+[node name="headRight" type="Button" parent="Customize/CustomizePanel"]
+margin_left = 60.0045
+margin_top = 81.5832
+margin_right = 72.0045
+margin_bottom = 101.583
+text = ">"
+
+[node name="headLeft" type="Button" parent="Customize/CustomizePanel"]
+margin_left = 27.0697
+margin_top = 81.5832
+margin_right = 39.0697
+margin_bottom = 101.583
+text = "<"
+
+[node name="bodyRight" type="Button" parent="Customize/CustomizePanel"]
+margin_left = 60.0045
+margin_top = 182.825
+margin_right = 24.0
+margin_bottom = 202.825
+text = ">"
+
+[node name="bodyLeft" type="Button" parent="Customize/CustomizePanel"]
+margin_left = 27.0697
+margin_top = 182.825
+margin_right = 39.0697
+margin_bottom = 202.825
+text = "<"
+
 [node name="Shop" type="Button" parent="."]
 margin_left = 431.0
 margin_top = 214.0
@@ -48,6 +171,7 @@ __meta__ = {
 }
 
 [node name="ItemSelect" type="Panel" parent="Shop"]
+visible = false
 margin_left = -109.324
 margin_top = 23.9782
 margin_right = 173.0
@@ -307,6 +431,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="finished" from="VideoPlayer" to="." method="_on_VideoPlayer_finished"]
+[connection signal="pressed" from="Customize" to="." method="_on_Customize_pressed"]
+[connection signal="value_changed" from="Customize/CustomizePanel/headRSlider" to="Customize/CustomizePanel" method="_on_headRSlider_value_changed"]
+[connection signal="value_changed" from="Customize/CustomizePanel/headGSlider" to="Customize/CustomizePanel" method="_on_headGSlider_value_changed"]
+[connection signal="value_changed" from="Customize/CustomizePanel/headBSlider" to="Customize/CustomizePanel" method="_on_headBSlider_value_changed"]
+[connection signal="value_changed" from="Customize/CustomizePanel/bodyRSlider" to="Customize/CustomizePanel" method="_on_bodyRSlider_value_changed"]
+[connection signal="value_changed" from="Customize/CustomizePanel/bodyGSlider" to="Customize/CustomizePanel" method="_on_bodyGSlider_value_changed"]
+[connection signal="value_changed" from="Customize/CustomizePanel/bodyBSlider" to="Customize/CustomizePanel" method="_on_bodyBSlider_value_changed"]
+[connection signal="pressed" from="Customize/CustomizePanel/headRight" to="Customize/CustomizePanel" method="_on_headRight_pressed"]
+[connection signal="pressed" from="Customize/CustomizePanel/headLeft" to="Customize/CustomizePanel" method="_on_headLeft_pressed"]
+[connection signal="pressed" from="Customize/CustomizePanel/bodyRight" to="Customize/CustomizePanel" method="_on_bodyRight_pressed"]
+[connection signal="pressed" from="Customize/CustomizePanel/bodyLeft" to="Customize/CustomizePanel" method="_on_bodyLeft_pressed"]
 [connection signal="pressed" from="Shop" to="." method="_on_Shop_pressed"]
 [connection signal="pressed" from="Shop/ItemSelect/VBoxContainer/Pistol" to="Shop" method="_on_Pistol_pressed"]
 [connection signal="pressed" from="Shop/ItemSelect/PistolDetails/VBoxContainer/pistolDamage" to="Shop" method="_on_pistolDamage_pressed"]

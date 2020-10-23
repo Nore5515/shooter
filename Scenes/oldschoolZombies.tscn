@@ -1,0 +1,166 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Scenes/bloodParticles.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Images/newSTUFF/zombie/zombieAttacking.png" type="Texture" id=2]
+[ext_resource path="res://Images/newSTUFF/zombie/zombieBack.png" type="Texture" id=3]
+[ext_resource path="res://Images/newSTUFF/zombie/zombieRArm.png" type="Texture" id=4]
+[ext_resource path="res://Images/newSTUFF/zombie/zombieSeeking.png" type="Texture" id=5]
+[ext_resource path="res://Images/newSTUFF/zombie/zombieDead.png" type="Texture" id=6]
+[ext_resource path="res://Sounds/legSmashSound.wav" type="AudioStream" id=7]
+[ext_resource path="res://Sounds/meatHit.wav" type="AudioStream" id=8]
+[ext_resource path="res://Images/newSTUFF/zombie/zombieIdle.png" type="Texture" id=9]
+[ext_resource path="res://Images/newSTUFF/zombie/zombieBackDead.png" type="Texture" id=10]
+[ext_resource path="res://Zombie.gd" type="Script" id=11]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 60.0
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1.51107, 0.508657 )
+
+[node name="Zombie" type="KinematicBody2D" groups=[
+"zombie",
+]]
+collision_layer = 2
+script = ExtResource( 11 )
+
+[node name="Head" type="Area2D" parent="."]
+position = Vector2( -16.0322, -1 )
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Head"]
+position = Vector2( 15, -9 )
+polygon = PoolVector2Array( -1.6179, -3.48995, 1.01057, -3.42882, 3.91411, -1.90064, 5.13666, 0.697265, 4.15862, 2.98954, 2.38593, 3.78419, -0.364796, 4.15095, -2.84045, 3.63137, -4.36863, 1.09459, -4.24637, -1.04486, -3.32947, -2.66473 )
+
+[node name="Body" type="Area2D" parent="."]
+position = Vector2( -11.0962, 0 )
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Body"]
+polygon = PoolVector2Array( 9.33253, -5.79608, 9.17168, 0.220128, 12.4854, 0.187956, 12.228, -5.95694 )
+
+[node name="Legs" type="Area2D" parent="."]
+position = Vector2( -5.94864, 2.63812 )
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Legs"]
+position = Vector2( 1.12603, -1.06434 )
+polygon = PoolVector2Array( 6.21182, -1.45017, 8.30302, 1.57402, 1.99726, 1.57402, 2.86591, -1.35365 )
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+margin_left = -13.0
+margin_top = -17.0
+margin_right = 73.0
+margin_bottom = -3.0
+rect_scale = Vector2( 0.316911, 0.316911 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Legsnap" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+
+[node name="MeatHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = 3.212
+
+[node name="bloodParticles" parent="." instance=ExtResource( 1 )]
+amount = 25
+speed_scale = 2.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Detection" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+
+[node name="DetectionSphere" type="CollisionShape2D" parent="Detection"]
+shape = SubResource( 1 )
+
+[node name="MainCollider" type="CollisionShape2D" parent="."]
+position = Vector2( -0.382343, 0.796618 )
+shape = SubResource( 2 )
+
+[node name="ZombieSpriteParts" type="Node2D" parent="."]
+
+[node name="zombieRArmPivot" type="Node2D" parent="ZombieSpriteParts"]
+position = Vector2( 2, -7 )
+
+[node name="zombieRArm" type="Sprite" parent="ZombieSpriteParts/zombieRArmPivot"]
+position = Vector2( -16.907, -19.707 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="rArm" type="Area2D" parent="ZombieSpriteParts/zombieRArmPivot"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ZombieSpriteParts/zombieRArmPivot/rArm"]
+polygon = PoolVector2Array( 2.88009, 4.22618, 3.68002, 4.08826, 5.11437, 6.29495, 4.42478, 9.54983, 4.01102, 9.60499, 1.50091, 7.61897, 1.41816, 5.43986 )
+
+[node name="zombieLArmPivot" type="Node2D" parent="ZombieSpriteParts"]
+position = Vector2( -3, -7 )
+
+[node name="zombieLArm" type="Sprite" parent="ZombieSpriteParts/zombieLArmPivot"]
+position = Vector2( -11.907, -19.707 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 4 )
+centered = false
+flip_h = true
+
+[node name="rArm2" type="Area2D" parent="ZombieSpriteParts/zombieLArmPivot"]
+position = Vector2( 1.22104, 0.0275836 )
+scale = Vector2( -1, 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ZombieSpriteParts/zombieLArmPivot/rArm2"]
+polygon = PoolVector2Array( 2.88009, 4.22618, 3.68002, 4.08826, 5.11437, 6.29495, 4.42478, 9.54983, 4.01102, 9.60499, 1.50091, 7.61897, 1.41816, 5.43986 )
+
+[node name="zombieAttacking" type="Sprite" parent="ZombieSpriteParts"]
+visible = false
+position = Vector2( -14.907, -26.707 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="zombieBack" type="Sprite" parent="ZombieSpriteParts"]
+visible = false
+position = Vector2( -14.907, -26.707 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="zombieIdle" type="Sprite" parent="ZombieSpriteParts"]
+position = Vector2( -14.907, -26.707 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="zombieSeeking" type="Sprite" parent="ZombieSpriteParts"]
+visible = false
+position = Vector2( -14.907, -26.707 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="zombieDead" type="Sprite" parent="ZombieSpriteParts"]
+visible = false
+position = Vector2( -14.907, -26.707 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="zombieBackDead" type="Sprite" parent="ZombieSpriteParts"]
+visible = false
+position = Vector2( -14.907, -26.707 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 10 )
+centered = false
+[connection signal="area_entered" from="Head" to="." method="_on_Head_area_entered"]
+[connection signal="area_entered" from="Body" to="." method="_on_Body_area_entered"]
+[connection signal="area_entered" from="Legs" to="." method="_on_Legs_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="Detection" to="." method="_on_Detection_body_entered"]
+[connection signal="body_exited" from="Detection" to="." method="_on_Detection_body_exited"]
+[connection signal="body_entered" from="ZombieSpriteParts/zombieRArmPivot/rArm" to="." method="_on_rArm_body_entered"]
+[connection signal="body_entered" from="ZombieSpriteParts/zombieLArmPivot/rArm2" to="." method="_on_rArm2_body_entered"]

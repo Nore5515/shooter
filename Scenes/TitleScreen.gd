@@ -16,6 +16,7 @@ func _on_VideoPlayer_finished():
 func hideAll():
 	$Begin/Panel.visible = false
 	$Shop/ItemSelect.visible = false
+	$Customize/CustomizePanel.visible = false
 
 
 func _on_Begin_pressed():
@@ -33,3 +34,11 @@ func _on_Shop_pressed():
 		hideAll()
 		$Shop/ItemSelect.visible = true
 
+
+
+func _on_Customize_pressed():
+	if $Customize/CustomizePanel.visible == true:
+		hideAll()
+	else:
+		hideAll()
+		$Customize/CustomizePanel.visible = true
