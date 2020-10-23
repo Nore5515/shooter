@@ -10,8 +10,10 @@ var pistolDamageUpgrade = false
 func hideAll():
 	$ItemSelect/PistolDetails.visible = false
 	$ItemSelect/MeleeDetails.visible = false
+	$ItemSelect/ARDetails.visible = false
 	$ItemSelect/ItemDesc.text = ""
-
+	$ItemSelect/ItemPic.texture = null
+	
 
 func toggleAll():
 	pistolClipUpgrade = false
@@ -26,7 +28,7 @@ func _on_Pistol_pressed():
 		hideAll()
 		$ItemSelect/PistolDetails.visible = true
 		$ItemSelect/ItemDesc.text = "A magazine fed pistol. Good all around, but can struggle at close quarters. It's main struggle is ammo."
-	
+		$ItemSelect/ItemPic.texture = load("res://Images/newSTUFF/pistol.png")
 
 
 func _on_pistolDamage_pressed():
@@ -111,4 +113,15 @@ func _on_Melee_pressed():
 		hideAll()
 		$ItemSelect/MeleeDetails.visible = true
 		$ItemSelect/ItemDesc.text = "Although typically used as an emergency backup, a well trained melee specialist can be a nightmare to their enemies."
+		$ItemSelect/ItemPic.texture = load("res://Images/newSTUFF/meleeSwipe.png")
+
+
+func _on_AR_pressed():
+	if $ItemSelect/ARDetails.visible == true:
+		hideAll()
+	else:
+		hideAll()
+		$ItemSelect/ARDetails.visible = true
+		$ItemSelect/ItemDesc.text = "A powerful assault rifle, although slightly innacurate and lacks in ammo it makes up for it in damage."
+		$ItemSelect/ItemPic.texture = load("res://Images/newSTUFF/AR/ARwithMag.png")
 

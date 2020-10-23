@@ -232,13 +232,13 @@ func hearGunshot(gunshotLoc):
 func _on_rArm_body_entered(body):
 	if body.is_in_group("player"):
 		if !headshotted:
-			body.die()
+			pass#body.die()
 
 
 func _on_rArm2_body_entered(body):
 	if body.is_in_group("player"):
 		if !headshotted:
-			body.die()
+			pass#body.die()
 
 
 func knockback(force, source):
@@ -246,3 +246,9 @@ func knockback(force, source):
 	dir = dir.clamped(force)
 	knockbackForce = dir
 	knockingBack = true
+
+
+func _on_DamageBox_body_entered(body):
+	if body.is_in_group("player"):
+		if !headshotted:
+			body.die()

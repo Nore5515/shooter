@@ -25,9 +25,9 @@ tile_data = PoolIntArray( -786450, 3, 0, -786449, 3, 0, -786448, 3, 0, -786447, 
 
 [node name="AmmoCount" type="Label" parent="CanvasLayer"]
 modulate = Color( 0, 0, 0, 1 )
-margin_left = 843.0
+margin_left = 508.0
 margin_top = 541.0
-margin_right = 883.0
+margin_right = 623.0
 margin_bottom = 555.0
 rect_scale = Vector2( 4.45137, 4.03018 )
 custom_fonts/font = ExtResource( 3 )

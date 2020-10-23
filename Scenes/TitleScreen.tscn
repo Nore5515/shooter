@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Images/wagh.ogv" type="VideoStream" id=1]
 [ext_resource path="res://8bitFont.tres" type="DynamicFont" id=2]
@@ -12,6 +12,10 @@
 [ext_resource path="res://Images/newSTUFF/meleeDamageUpgrade.png" type="Texture" id=10]
 [ext_resource path="res://Images/newSTUFF/meleeKnockbackUpgrade.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/MeleeDetails.gd" type="Script" id=12]
+[ext_resource path="res://Images/newSTUFF/AR/ARwithMag.png" type="Texture" id=13]
+[ext_resource path="res://Images/newSTUFF/AR/ARdamageUpgrade.png" type="Texture" id=14]
+[ext_resource path="res://Images/newSTUFF/AR/ARmagUpgrade.png" type="Texture" id=15]
+[ext_resource path="res://Scenes/ARDetails.gd" type="Script" id=16]
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource( 4 )
@@ -54,6 +58,7 @@ __meta__ = {
 }
 
 [node name="CustomizePanel" type="Panel" parent="Customize"]
+visible = false
 margin_left = 117.302
 margin_top = -73.7198
 margin_right = 267.0
@@ -175,6 +180,7 @@ __meta__ = {
 }
 
 [node name="ItemSelect" type="Panel" parent="Shop"]
+visible = false
 margin_left = -109.324
 margin_top = 23.9782
 margin_right = 173.0
@@ -281,13 +287,15 @@ __meta__ = {
 [node name="ItemPic" type="TextureRect" parent="Shop/ItemSelect"]
 margin_left = 95.0999
 margin_top = 54.8653
-margin_right = 175.0
-margin_bottom = 100.0
+margin_right = 175.199
+margin_bottom = 100.299
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MeleeDetails" type="Panel" parent="Shop/ItemSelect"]
+visible = false
 margin_left = 175.162
 margin_top = -2.28882e-05
 margin_right = 282.0
@@ -332,9 +340,12 @@ margin_right = 160.0
 margin_bottom = 151.0
 rect_scale = Vector2( 0.542055, 0.542055 )
 custom_fonts/font = ExtResource( 2 )
-text = "s"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Button" type="Button" parent="Shop/ItemSelect/MeleeDetails"]
+[node name="meleeBuy" type="Button" parent="Shop/ItemSelect/MeleeDetails"]
 margin_left = 55.6781
 margin_top = 84.1269
 margin_right = 97.6781
@@ -342,6 +353,74 @@ margin_bottom = 104.127
 rect_scale = Vector2( 0.850681, 0.584257 )
 custom_fonts/font = ExtResource( 2 )
 text = "BUY"
+
+[node name="ARDetails" type="Panel" parent="Shop/ItemSelect"]
+visible = false
+margin_left = 173.943
+margin_top = -2.28882e-05
+margin_right = 282.0
+margin_bottom = 100.0
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ARUnlock" type="TextureButton" parent="Shop/ItemSelect/ARDetails"]
+margin_right = 40.0
+margin_bottom = 10.0
+rect_scale = Vector2( 1.10367, 2.49636 )
+texture_normal = ExtResource( 13 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ARMag" type="TextureButton" parent="Shop/ItemSelect/ARDetails"]
+margin_left = 1.52588e-05
+margin_top = 24.791
+margin_right = 40.0
+margin_bottom = 34.791
+rect_scale = Vector2( 1.10367, 2.49636 )
+texture_normal = ExtResource( 15 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ARDamage" type="TextureButton" parent="Shop/ItemSelect/ARDetails"]
+margin_left = 1.52588e-05
+margin_top = 51.2076
+margin_right = 40.0
+margin_bottom = 61.2076
+rect_scale = Vector2( 1.10367, 2.49636 )
+texture_normal = ExtResource( 14 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ARDetails" type="Label" parent="Shop/ItemSelect/ARDetails"]
+margin_left = 51.2077
+margin_top = 0.81282
+margin_right = 174.0
+margin_bottom = 175.0
+rect_scale = Vector2( 0.455351, 0.455351 )
+custom_fonts/font = ExtResource( 2 )
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ARBuy" type="Button" parent="Shop/ItemSelect/ARDetails"]
+margin_left = 51.2077
+margin_top = 80.8756
+margin_right = 108.0
+margin_bottom = 100.876
+custom_fonts/font = ExtResource( 2 )
+text = "BUY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Begin" type="Button" parent="."]
 margin_left = 431.0
@@ -499,6 +578,16 @@ text = "0$"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="secret" type="Label" parent="."]
+margin_top = 560.0
+margin_right = 40.0
+margin_bottom = 574.0
+rect_scale = Vector2( 2.47738, 2.74553 )
+custom_fonts/font = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="finished" from="VideoPlayer" to="." method="_on_VideoPlayer_finished"]
 [connection signal="pressed" from="Customize" to="." method="_on_Customize_pressed"]
 [connection signal="value_changed" from="Customize/CustomizePanel/headRSlider" to="Customize/CustomizePanel" method="_on_headRSlider_value_changed"]
@@ -513,12 +602,20 @@ __meta__ = {
 [connection signal="pressed" from="Customize/CustomizePanel/bodyLeft" to="Customize/CustomizePanel" method="_on_bodyLeft_pressed"]
 [connection signal="pressed" from="Shop" to="." method="_on_Shop_pressed"]
 [connection signal="pressed" from="Shop/ItemSelect/VBoxContainer/Pistol" to="Shop" method="_on_Pistol_pressed"]
+[connection signal="pressed" from="Shop/ItemSelect/VBoxContainer/AR" to="Shop" method="_on_AR_pressed"]
 [connection signal="pressed" from="Shop/ItemSelect/VBoxContainer/Melee" to="Shop" method="_on_Melee_pressed"]
 [connection signal="pressed" from="Shop/ItemSelect/PistolDetails/VBoxContainer/pistolDamage" to="Shop" method="_on_pistolDamage_pressed"]
 [connection signal="pressed" from="Shop/ItemSelect/PistolDetails/VBoxContainer/pistolClip" to="Shop" method="_on_pistolClip_pressed"]
 [connection signal="pressed" from="Shop/ItemSelect/PistolDetails/VBoxContainer/pistolAuto" to="Shop" method="_on_pistolAuto_pressed"]
 [connection signal="pressed" from="Shop/ItemSelect/PistolDetails/pistolConfirm" to="Shop" method="_on_pistolConfirm_pressed"]
 [connection signal="pressed" from="Shop/ItemSelect/MeleeDetails/meleeUnlock" to="Shop/ItemSelect/MeleeDetails" method="_on_meleeUnlock_pressed"]
+[connection signal="pressed" from="Shop/ItemSelect/MeleeDetails/meleeDamage" to="Shop/ItemSelect/MeleeDetails" method="_on_meleeDamage_pressed"]
+[connection signal="pressed" from="Shop/ItemSelect/MeleeDetails/meleeKnockback" to="Shop/ItemSelect/MeleeDetails" method="_on_meleeKnockback_pressed"]
+[connection signal="pressed" from="Shop/ItemSelect/MeleeDetails/meleeBuy" to="Shop/ItemSelect/MeleeDetails" method="_on_meleeBuy_pressed"]
+[connection signal="pressed" from="Shop/ItemSelect/ARDetails/ARUnlock" to="Shop/ItemSelect/ARDetails" method="_on_ARUnlock_pressed"]
+[connection signal="pressed" from="Shop/ItemSelect/ARDetails/ARMag" to="Shop/ItemSelect/ARDetails" method="_on_ARMag_pressed"]
+[connection signal="pressed" from="Shop/ItemSelect/ARDetails/ARDamage" to="Shop/ItemSelect/ARDetails" method="_on_ARDamage_pressed"]
+[connection signal="pressed" from="Shop/ItemSelect/ARDetails/ARBuy" to="Shop/ItemSelect/ARDetails" method="_on_ARBuy_pressed"]
 [connection signal="pressed" from="Begin" to="." method="_on_Begin_pressed"]
 [connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/Tutorial" to="Begin/Panel" method="_on_Tutorial_pressed"]
 [connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/TargetSpeedrun" to="Begin/Panel" method="_on_TargetSpeedrun_pressed"]

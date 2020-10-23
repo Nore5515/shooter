@@ -134,4 +134,15 @@ script = ExtResource( 8 )
 [node name="Timer" type="Timer" parent="ZombieSpawner2"]
 wait_time = 2.0
 autostart = true
+
+[node name="Label" type="Label" parent="."]
+margin_left = 247.0
+margin_top = -137.0
+margin_right = 287.0
+margin_bottom = -123.0
+custom_fonts/font = ExtResource( 4 )
+text = "5515"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="timeout" from="ZombieSpawner2/Timer" to="ZombieSpawner2" method="_on_Timer_timeout"]

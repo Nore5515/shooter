@@ -45,6 +45,9 @@ func _ready():
 	maxPistolAmmo = get_node("/root/Global").pistolSize
 	pistolAmmo = maxPistolAmmo
 	
+	arAmmo = get_node("/root/Global").arSize
+	maxARAmmo = arAmmo
+	
 	$playerParts/playerHead1.texture = get_node("/root/Global").currentHead
 	$playerParts/playerBody1.texture = get_node("/root/Global").currentBody
 
@@ -104,9 +107,9 @@ func _process(_delta):
 					var bulletInstance = load("res://Scenes/Bullet.tscn").instance()
 					get_parent().add_child(bulletInstance)
 					bulletInstance.damage = get_node("/root/Global").arDamage
-					bulletInstance.headshotMultiplier = get_node("/root/Global").arHeadshotMultiplier
-					bulletInstance.crippleMultiplier = get_node("/root/Global").arCrippleMultiplier
-					bulletInstance.cripplePenalty = get_node("/root/Global").arCripplePenalty
+					#bulletInstance.headshotMultiplier = get_node("/root/Global").arHeadshotMultiplier
+					#bulletInstance.crippleMultiplier = get_node("/root/Global").arCrippleMultiplier
+					#bulletInstance.cripplePenalty = get_node("/root/Global").arCripplePenalty
 					bulletInstance.global_position = $HandPivot/Pistol/BulletPoint.global_position
 					bulletInstance.look_at(get_parent().get_node("AimingReticle").global_position)
 					#bulletInstance.look_at(get_parent().get_node("AimingReticle").getPointInSquare())
@@ -122,7 +125,8 @@ func _process(_delta):
 					get_parent().get_node("AimingReticle").recoilReticle(0.65)
 					recoil += 0.65
 					
-					arAmmo -= 1
+					if get_node("/root/Global").infAmmo == false:
+						arAmmo -= 1
 	
 		if pistolFiring:
 			if pistolCooldown > 0:
@@ -134,9 +138,9 @@ func _process(_delta):
 					var bulletInstance = load("res://Scenes/Bullet.tscn").instance()
 					get_parent().add_child(bulletInstance)
 					bulletInstance.damage = get_node("/root/Global").pistolDamage
-					bulletInstance.headshotMultiplier = get_node("/root/Global").pistolHeadshotMultiplier
-					bulletInstance.crippleMultiplier = get_node("/root/Global").pistolCrippleMultiplier
-					bulletInstance.cripplePenalty = get_node("/root/Global").pistolCripplePenalty
+					#bulletInstance.headshotMultiplier = get_node("/root/Global").pistolHeadshotMultiplier
+					#bulletInstance.crippleMultiplier = get_node("/root/Global").pistolCrippleMultiplier
+					#bulletInstance.cripplePenalty = get_node("/root/Global").pistolCripplePenalty
 					bulletInstance.global_position = $HandPivot/Pistol/BulletPoint.global_position
 					bulletInstance.look_at(get_parent().get_node("AimingReticle").global_position)
 					#bulletInstance.look_at(get_parent().get_node("AimingReticle").getPointInSquare())
@@ -152,8 +156,9 @@ func _process(_delta):
 					get_parent().get_node("AimingReticle").recoilReticle(0.65)
 					recoil += 0.35
 					
-					pistolAmmo -= 1
-				
+					if get_node("/root/Global").infAmmo == false:
+						pistolAmmo -= 1
+					
 	
 		#print (recoil)
 		recoil = lerp(0.0, recoil, 0.80)
@@ -230,15 +235,16 @@ func _input(event):
 			
 			# maybe add a "all false" for better scaling
 		elif event.is_action_pressed("2"):
-			pistolActive = false
-			pistolFiring = false
-			pistolCooldown = 1
-			arActive = true
-			arFiring = false
-			arCooldown = 1
-			$HandPivot/Pistol.visible = false
-			$HandPivot/ARwithMag.visible = true
-			$HandPivot/ARwithoutMag.visible = true
+			if get_node("/root/Global").arUnlocked:
+				pistolActive = false
+				pistolFiring = false
+				pistolCooldown = 1
+				arActive = true
+				arFiring = false
+				arCooldown = 1
+				$HandPivot/Pistol.visible = false
+				$HandPivot/ARwithMag.visible = true
+				$HandPivot/ARwithoutMag.visible = true
 	
 	
 		elif event.is_action_pressed("click"):
@@ -257,9 +263,9 @@ func _input(event):
 					var bulletInstance = load("res://Scenes/Bullet.tscn").instance()
 					get_parent().add_child(bulletInstance)
 					bulletInstance.damage = get_node("/root/Global").pistolDamage
-					bulletInstance.headshotMultiplier = get_node("/root/Global").pistolHeadshotMultiplier
-					bulletInstance.crippleMultiplier = get_node("/root/Global").pistolCrippleMultiplier
-					bulletInstance.cripplePenalty = get_node("/root/Global").pistolCripplePenalty
+					#bulletInstance.headshotMultiplier = get_node("/root/Global").pistolHeadshotMultiplier
+					#bulletInstance.crippleMultiplier = get_node("/root/Global").pistolCrippleMultiplier
+					#bulletInstance.cripplePenalty = get_node("/root/Global").pistolCripplePenalty
 					bulletInstance.global_position = $HandPivot/Pistol/BulletPoint.global_position
 					bulletInstance.look_at(get_parent().get_node("AimingReticle").global_position)
 					#bulletInstance.look_at(get_parent().get_node("AimingReticle").getPointInSquare())
@@ -275,7 +281,8 @@ func _input(event):
 					get_parent().get_node("AimingReticle").recoilReticle(0.65)
 					recoil += 0.35
 					
-					pistolAmmo -= 1
+					if get_node("/root/Global").infAmmo == false:
+						pistolAmmo -= 1
 				else:
 					# CLICK! No ammo.
 					if get_node("/root/Global").pistolAuto == false:
@@ -293,7 +300,7 @@ func _input(event):
 		
 		
 		elif event.is_action_pressed("melee"):
-			if meleeReady == true:
+			if meleeReady == true && get_node("/root/Global").meleeUnlocked:
 				meleeReady = false
 				$HandPivot/meleeSwipe.visible = true
 				$meleeTime.start()

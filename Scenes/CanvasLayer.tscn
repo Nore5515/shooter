@@ -7,14 +7,15 @@
 
 [node name="AmmoCount" type="Label" parent="."]
 modulate = Color( 0, 0, 0, 1 )
-margin_left = 843.0
+margin_left = 620.0
 margin_top = 541.0
-margin_right = 883.0
+margin_right = 710.0
 margin_bottom = 555.0
 rect_scale = Vector2( 4.45137, 4.03018 )
 custom_fonts/font = ExtResource( 1 )
 text = "7/7"
 align = 2
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

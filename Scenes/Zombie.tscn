@@ -148,6 +148,11 @@ position = Vector2( -14.907, -26.707 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 11 )
 centered = false
+
+[node name="DamageBox" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DamageBox"]
+polygon = PoolVector2Array( -3.85397, -2.63169, 4.20825, -2.53955, 3.24078, 3.40345, -2.56401, 3.35738 )
 [connection signal="area_entered" from="Head" to="." method="_on_Head_area_entered"]
 [connection signal="area_entered" from="Body" to="." method="_on_Body_area_entered"]
 [connection signal="area_entered" from="Legs" to="." method="_on_Legs_area_entered"]
@@ -156,3 +161,4 @@ centered = false
 [connection signal="body_exited" from="Detection" to="." method="_on_Detection_body_exited"]
 [connection signal="body_entered" from="ZombieSpriteParts/zombieRArmPivot/rArm" to="." method="_on_rArm_body_entered"]
 [connection signal="body_entered" from="ZombieSpriteParts/zombieLArmPivot/rArm2" to="." method="_on_rArm2_body_entered"]
+[connection signal="body_entered" from="DamageBox" to="." method="_on_DamageBox_body_entered"]

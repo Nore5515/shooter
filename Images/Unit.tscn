@@ -47,21 +47,19 @@ shape = SubResource( 1 )
 
 [node name="ARwithMag" type="Sprite" parent="HandPivot"]
 visible = false
-position = Vector2( 4, -4 )
-scale = Vector2( 0.1, 0.1 )
+position = Vector2( 0, -12 )
+scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 10 )
 centered = false
-region_enabled = true
-region_rect = Rect2( 20, 162, 162, 71 )
+region_rect = Rect2( 44, 198, 406, 155 )
 
 [node name="ARwithoutMag" type="Sprite" parent="HandPivot"]
 visible = false
-position = Vector2( 4, -4 )
-scale = Vector2( 0.1, 0.1 )
+position = Vector2( 0, -12 )
+scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 11 )
 centered = false
-region_enabled = true
-region_rect = Rect2( 20, 162, 162, 71 )
+region_rect = Rect2( 39, 208, 415, 110 )
 
 [node name="Pistol" type="AnimatedSprite" parent="HandPivot"]
 position = Vector2( 9.76522, 1.42687 )
@@ -149,7 +147,7 @@ scale = Vector2( 0.04, 0.04 )
 texture = ExtResource( 12 )
 
 [node name="meleeTime" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.3
 one_shot = true
 
 [node name="meleeDelay" type="Timer" parent="."]
