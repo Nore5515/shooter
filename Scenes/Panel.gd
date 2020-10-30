@@ -6,6 +6,7 @@ var targetTimeTrial = false
 var movingTargets = false
 var zombies = false
 var zombieTown = false
+var default = false
 
 
 func resetStuff():
@@ -68,6 +69,9 @@ func _on_Start_pressed():
 		get_tree().change_scene("res://Scenes/Zombies.tscn")
 	elif zombieTown:
 		get_tree().change_scene("res://Scenes/ZombieTown.tscn")
+	elif default:
+		get_tree().change_scene("res://Scenes/DefaultLevel.tscn")
+		
 		
 
 
@@ -113,5 +117,19 @@ func _on_Zombies2_pressed():
 			get_node("/root/Global").bestZombiesTime)
 
 
-func _on_Shop_pressed():
-	pass # Replace with function body.
+
+func _on_Default_pressed():
+	if default:
+		default = false
+		resetStuff()
+	else:
+		resetStuff()
+		default = true
+		$ScenarioDesc.text = "A default, example map."
+		#$ScenarioPic.texture = load("res://Images/zombieTownScreenshot.PNG")
+		#$BestTime.text = "Best Time: " + String(\
+			#get_node("/root/Global").bestZombiesTime)
+
+
+func _on_Campaign_pressed():
+	get_tree().change_scene("res://Scenes/Campaign/CampaignMap.tscn")

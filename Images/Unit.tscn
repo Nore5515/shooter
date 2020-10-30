@@ -83,7 +83,7 @@ collision_layer = 0
 collision_mask = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HandPivot/meleeSwipe/Area2D"]
-polygon = PoolVector2Array( -107.223, -217.159, 107.223, -155.114, 214.447, 31.0227, 53.6117, 217.159, -375.282, 248.182, -375.282, 62.0454, -375.282, -155.114 )
+polygon = PoolVector2Array( -107.223, -248.181, 268.058, -186.136, 321.669, 31.0227, 214.446, 279.204, -375.282, 248.182, -375.282, 62.0454, -375.282, -155.114 )
 
 [node name="ReloadBar" type="ProgressBar" parent="."]
 visible = false

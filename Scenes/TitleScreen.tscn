@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Images/wagh.ogv" type="VideoStream" id=1]
 [ext_resource path="res://8bitFont.tres" type="DynamicFont" id=2]
@@ -16,15 +16,18 @@
 [ext_resource path="res://Images/newSTUFF/AR/ARdamageUpgrade.png" type="Texture" id=14]
 [ext_resource path="res://Images/newSTUFF/AR/ARmagUpgrade.png" type="Texture" id=15]
 [ext_resource path="res://Scenes/ARDetails.gd" type="Script" id=16]
+[ext_resource path="res://Scenes/titleBG.gd" type="Script" id=17]
+[ext_resource path="res://Images/titleBG.png" type="Texture" id=18]
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource( 4 )
 
 [node name="VideoPlayer" type="VideoPlayer" parent="."]
-margin_top = -9.0
-margin_right = 1920.0
-margin_bottom = 1079.0
-rect_scale = Vector2( 0.528839, 0.576823 )
+margin_left = -89.0
+margin_top = -58.0
+margin_right = 1831.0
+margin_bottom = 1030.0
+rect_scale = Vector2( 0.645904, 0.70451 )
 stream = ExtResource( 1 )
 volume_db = -80.0
 autoplay = true
@@ -32,6 +35,16 @@ expand = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="titleBG" type="Node2D" parent="."]
+modulate = Color( 0.568627, 0.568627, 0.568627, 1 )
+position = Vector2( -820, 401 )
+scale = Vector2( 1.10242, 1.81734 )
+script = ExtResource( 17 )
+
+[node name="titleBG" type="Sprite" parent="titleBG"]
+scale = Vector2( 4.49424, 4.49424 )
+texture = ExtResource( 18 )
 
 [node name="Title" type="Label" parent="."]
 margin_left = 173.0
@@ -53,118 +66,136 @@ margin_bottom = 325.0
 rect_scale = Vector2( 2.2165, 2.03473 )
 custom_fonts/font = ExtResource( 2 )
 text = "CUSTOMIZE"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CustomizePanel" type="Panel" parent="Customize"]
+[node name="CustomizePanel" type="Node2D" parent="Customize"]
 visible = false
-margin_left = 117.302
-margin_top = -73.7198
-margin_right = 267.0
-margin_bottom = 133.0
 script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="playerHead1" type="Sprite" parent="Customize/CustomizePanel"]
-position = Vector2( 60.9069, 73.7198 )
+position = Vector2( 178.209, 0 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 6 )
 
 [node name="playerBody1" type="Sprite" parent="Customize/CustomizePanel"]
-position = Vector2( 60.9069, 118.443 )
+position = Vector2( 178.209, 44.7232 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 7 )
 
 [node name="headRSlider" type="HSlider" parent="Customize/CustomizePanel"]
-margin_left = 88.8789
-margin_top = 27.522
-margin_right = 240.074
-margin_bottom = 43.522
+margin_left = 206.181
+margin_top = -46.1978
+margin_right = 357.376
+margin_bottom = -30.1978
 rect_scale = Vector2( 0.357204, 0.357204 )
 max_value = 255.0
+value = 255.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="headGSlider" type="HSlider" parent="Customize/CustomizePanel"]
-margin_left = 88.8789
-margin_top = 42.7575
-margin_right = 240.074
-margin_bottom = 58.7575
+margin_left = 206.181
+margin_top = -30.9623
+margin_right = 357.376
+margin_bottom = -14.9623
 rect_scale = Vector2( 0.357204, 0.357204 )
 max_value = 255.0
+value = 255.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="headBSlider" type="HSlider" parent="Customize/CustomizePanel"]
-margin_left = 88.8789
-margin_top = 57.0099
-margin_right = 240.074
-margin_bottom = 73.0099
+margin_left = 206.181
+margin_top = -16.7099
+margin_right = 357.376
+margin_bottom = -0.709911
 rect_scale = Vector2( 0.357204, 0.357204 )
 max_value = 255.0
+value = 255.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="bodyRSlider" type="HSlider" parent="Customize/CustomizePanel"]
-margin_left = 88.8789
-margin_top = 128.272
-margin_right = 240.074
-margin_bottom = 144.272
+margin_left = 206.181
+margin_top = 54.5522
+margin_right = 357.376
+margin_bottom = 70.5522
 rect_scale = Vector2( 0.357204, 0.357204 )
 max_value = 255.0
+value = 255.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="bodyGSlider" type="HSlider" parent="Customize/CustomizePanel"]
-margin_left = 88.8789
-margin_top = 143.508
-margin_right = 240.074
-margin_bottom = 159.508
+margin_left = 206.181
+margin_top = 69.7882
+margin_right = 357.376
+margin_bottom = 85.7882
 rect_scale = Vector2( 0.357204, 0.357204 )
 max_value = 255.0
+value = 255.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="bodyBSlider" type="HSlider" parent="Customize/CustomizePanel"]
-margin_left = 88.8789
-margin_top = 157.76
-margin_right = 240.074
-margin_bottom = 173.76
+margin_left = 206.181
+margin_top = 84.0402
+margin_right = 357.376
+margin_bottom = 100.04
 rect_scale = Vector2( 0.357204, 0.357204 )
 max_value = 255.0
+value = 255.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="headRight" type="Button" parent="Customize/CustomizePanel"]
-margin_left = 60.0045
-margin_top = 81.5832
-margin_right = 72.0045
-margin_bottom = 101.583
+margin_left = 177.307
+margin_top = 7.8634
+margin_right = 197.307
+margin_bottom = 27.8634
 text = ">"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="headLeft" type="Button" parent="Customize/CustomizePanel"]
-margin_left = 27.0697
-margin_top = 81.5832
-margin_right = 39.0697
-margin_bottom = 101.583
+margin_left = 144.372
+margin_top = 7.8634
+margin_right = 164.372
+margin_bottom = 27.8634
 text = "<"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="bodyRight" type="Button" parent="Customize/CustomizePanel"]
-margin_left = 60.0045
-margin_top = 182.825
-margin_right = 24.0
-margin_bottom = 202.825
+margin_left = 177.307
+margin_top = 109.105
+margin_right = 197.307
+margin_bottom = 129.105
 text = ">"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="bodyLeft" type="Button" parent="Customize/CustomizePanel"]
-margin_left = 27.0697
-margin_top = 182.825
-margin_right = 39.0697
-margin_bottom = 202.825
+margin_left = 144.372
+margin_top = 109.105
+margin_right = 164.372
+margin_bottom = 129.105
 text = "<"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Shop" type="Button" parent="."]
 margin_left = 431.0
@@ -174,6 +205,7 @@ margin_bottom = 234.0
 rect_scale = Vector2( 2.46057, 2.46057 )
 custom_fonts/font = ExtResource( 2 )
 text = "SHOP"
+flat = true
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -201,6 +233,7 @@ margin_right = 95.0
 margin_bottom = 18.0
 custom_fonts/font = ExtResource( 2 )
 text = "PISTOL"
+flat = true
 
 [node name="AR" type="Button" parent="Shop/ItemSelect/VBoxContainer"]
 margin_top = 22.0
@@ -208,6 +241,7 @@ margin_right = 95.0
 margin_bottom = 40.0
 custom_fonts/font = ExtResource( 2 )
 text = "AR"
+flat = true
 
 [node name="Melee" type="Button" parent="Shop/ItemSelect/VBoxContainer"]
 margin_top = 44.0
@@ -215,6 +249,7 @@ margin_right = 95.0
 margin_bottom = 62.0
 custom_fonts/font = ExtResource( 2 )
 text = "MELEE"
+flat = true
 
 [node name="ItemDesc" type="Label" parent="Shop/ItemSelect"]
 margin_left = 95.0999
@@ -247,6 +282,7 @@ margin_right = 50.0
 margin_bottom = 18.0
 custom_fonts/font = ExtResource( 2 )
 text = "dmg"
+flat = true
 
 [node name="pistolClip" type="Button" parent="Shop/ItemSelect/PistolDetails/VBoxContainer"]
 margin_top = 22.0
@@ -254,6 +290,7 @@ margin_right = 50.0
 margin_bottom = 40.0
 custom_fonts/font = ExtResource( 2 )
 text = "clip"
+flat = true
 
 [node name="pistolAuto" type="Button" parent="Shop/ItemSelect/PistolDetails/VBoxContainer"]
 margin_top = 44.0
@@ -261,6 +298,7 @@ margin_right = 50.0
 margin_bottom = 62.0
 custom_fonts/font = ExtResource( 2 )
 text = "auto"
+flat = true
 
 [node name="pistolConfirm" type="Button" parent="Shop/ItemSelect/PistolDetails"]
 margin_left = 49.9884
@@ -353,6 +391,7 @@ margin_bottom = 104.127
 rect_scale = Vector2( 0.850681, 0.584257 )
 custom_fonts/font = ExtResource( 2 )
 text = "BUY"
+flat = true
 
 [node name="ARDetails" type="Panel" parent="Shop/ItemSelect"]
 visible = false
@@ -418,6 +457,7 @@ margin_right = 108.0
 margin_bottom = 100.876
 custom_fonts/font = ExtResource( 2 )
 text = "BUY"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -430,15 +470,15 @@ margin_bottom = 158.0
 rect_scale = Vector2( 2.46057, 2.46057 )
 custom_fonts/font = ExtResource( 2 )
 text = "BEGIN"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Panel" type="Panel" parent="Begin"]
-visible = false
 margin_left = -110.95
 margin_top = 39.0154
-margin_right = 178.374
+margin_right = 212.0
 margin_bottom = 159.0
 script = ExtResource( 3 )
 __meta__ = {
@@ -446,15 +486,16 @@ __meta__ = {
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Begin/Panel"]
-margin_right = 316.0
+margin_right = 383.0
 margin_bottom = 119.0
+scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Begin/Panel/ScrollContainer"]
 margin_right = 159.0
-margin_bottom = 128.0
+margin_bottom = 172.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -464,6 +505,7 @@ margin_right = 159.0
 margin_bottom = 18.0
 custom_fonts/font = ExtResource( 2 )
 text = "Tutorial"
+flat = true
 
 [node name="TargetSpeedrun" type="Button" parent="Begin/Panel/ScrollContainer/VBoxContainer"]
 margin_top = 22.0
@@ -471,6 +513,7 @@ margin_right = 159.0
 margin_bottom = 40.0
 custom_fonts/font = ExtResource( 2 )
 text = "Target Speedrun"
+flat = true
 
 [node name="TargetTimeTrial2" type="Button" parent="Begin/Panel/ScrollContainer/VBoxContainer"]
 margin_top = 44.0
@@ -478,6 +521,7 @@ margin_right = 159.0
 margin_bottom = 62.0
 custom_fonts/font = ExtResource( 2 )
 text = "Target Time Trial"
+flat = true
 
 [node name="MovingTargets" type="Button" parent="Begin/Panel/ScrollContainer/VBoxContainer"]
 margin_top = 66.0
@@ -485,6 +529,7 @@ margin_right = 159.0
 margin_bottom = 84.0
 custom_fonts/font = ExtResource( 2 )
 text = "Moving Targets"
+flat = true
 
 [node name="Zombies!" type="Button" parent="Begin/Panel/ScrollContainer/VBoxContainer"]
 margin_top = 88.0
@@ -492,6 +537,7 @@ margin_right = 159.0
 margin_bottom = 106.0
 custom_fonts/font = ExtResource( 2 )
 text = "Zombies!"
+flat = true
 
 [node name="Zombies!2" type="Button" parent="Begin/Panel/ScrollContainer/VBoxContainer"]
 margin_top = 110.0
@@ -499,6 +545,23 @@ margin_right = 159.0
 margin_bottom = 128.0
 custom_fonts/font = ExtResource( 2 )
 text = "Zombie Town"
+flat = true
+
+[node name="Default" type="Button" parent="Begin/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 132.0
+margin_right = 159.0
+margin_bottom = 150.0
+custom_fonts/font = ExtResource( 2 )
+text = "Default"
+flat = true
+
+[node name="Campaign" type="Button" parent="Begin/Panel/ScrollContainer/VBoxContainer"]
+margin_top = 154.0
+margin_right = 159.0
+margin_bottom = 172.0
+custom_fonts/font = ExtResource( 2 )
+text = "Campaign"
+flat = true
 
 [node name="ScenarioDesc" type="Label" parent="Begin/Panel"]
 margin_left = 160.532
@@ -538,6 +601,7 @@ margin_left = 290.99
 margin_top = 0.81282
 margin_right = 322.0
 margin_bottom = 120.0
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -565,6 +629,7 @@ margin_bottom = 549.0
 rect_scale = Vector2( 2.63029, 2.63029 )
 custom_fonts/font = ExtResource( 2 )
 text = "QUIT"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -623,5 +688,7 @@ __meta__ = {
 [connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/MovingTargets" to="Begin/Panel" method="_on_MovingTargets_pressed"]
 [connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/Zombies!" to="Begin/Panel" method="_on_Zombies_pressed"]
 [connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/Zombies!2" to="Begin/Panel" method="_on_Zombies2_pressed"]
+[connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/Default" to="Begin/Panel" method="_on_Default_pressed"]
+[connection signal="pressed" from="Begin/Panel/ScrollContainer/VBoxContainer/Campaign" to="Begin/Panel" method="_on_Campaign_pressed"]
 [connection signal="pressed" from="Begin/Panel/Start" to="Begin/Panel" method="_on_Start_pressed"]
 [connection signal="pressed" from="Quit" to="Begin/Panel" method="_on_Quit_pressed"]

@@ -1,0 +1,187 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://8bitFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://CampaignCam.gd" type="Script" id=2]
+[ext_resource path="res://CampaignMap.gd" type="Script" id=3]
+[ext_resource path="res://Images/bg.png" type="Texture" id=4]
+[ext_resource path="res://Images/campaignStuff/campaignMap.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="CampaignMap" type="Node2D"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="campaignMap" type="Sprite" parent="."]
+position = Vector2( 740, 402 )
+scale = Vector2( 1.60092, 1.60092 )
+texture = ExtResource( 5 )
+
+[node name="CampaignCamBody" type="KinematicBody2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="CampaignCam" type="Camera2D" parent="CampaignCamBody"]
+current = true
+zoom = Vector2( 1.25, 1.265 )
+limit_left = -59
+limit_top = -93
+limit_right = 1536
+limit_bottom = 772
+editor_draw_limits = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CampaignCamBody"]
+position = Vector2( 477, 259 )
+shape = SubResource( 1 )
+
+[node name="level1" type="Button" parent="."]
+margin_left = 22.0
+margin_top = 81.0
+margin_right = 386.0
+margin_bottom = 277.0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level2" type="Button" parent="."]
+margin_left = 281.0
+margin_top = 404.0
+margin_right = 841.0
+margin_bottom = 638.0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level3" type="Button" parent="."]
+margin_left = 840.0
+margin_top = 13.0
+margin_right = 1084.0
+margin_bottom = 152.0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level4" type="Button" parent="."]
+margin_left = 840.0
+margin_top = 190.0
+margin_right = 1098.0
+margin_bottom = 316.0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level5" type="Button" parent="."]
+margin_left = 1242.0
+margin_top = 276.0
+margin_right = 1410.0
+margin_bottom = 514.0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level6" type="Button" parent="."]
+margin_left = 1413.0
+margin_top = 328.0
+margin_right = 1568.0
+margin_bottom = 396.0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="shade1" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.898039 )
+position = Vector2( 204, 175 )
+rotation = -3.14159
+scale = Vector2( 0.190943, -0.186841 )
+texture = ExtResource( 4 )
+
+[node name="shade2" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.898039 )
+position = Vector2( 562, 522 )
+rotation = -3.14159
+scale = Vector2( 0.291053, -0.218103 )
+texture = ExtResource( 4 )
+
+[node name="shade3" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.898039 )
+position = Vector2( 961, 85 )
+scale = Vector2( 0.128646, 0.128646 )
+texture = ExtResource( 4 )
+
+[node name="shade4" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.898039 )
+position = Vector2( 967, 253 )
+scale = Vector2( 0.134696, 0.118273 )
+texture = ExtResource( 4 )
+
+[node name="shade5" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.898039 )
+position = Vector2( 1324, 393 )
+scale = Vector2( -0.0865413, 0.218531 )
+texture = ExtResource( 4 )
+
+[node name="bonusShade1" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.898039 )
+position = Vector2( 175, 386 )
+scale = Vector2( -0.074875, 0.137004 )
+texture = ExtResource( 4 )
+
+[node name="bonusShade2" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.898039 )
+position = Vector2( 184, 622 )
+scale = Vector2( -0.0562679, -0.10094 )
+texture = ExtResource( 4 )
+
+[node name="escapeStuff" type="Node2D" parent="."]
+visible = false
+
+[node name="escapeText" type="Label" parent="escapeStuff"]
+margin_left = 1237.0
+margin_top = 64.0
+margin_right = 1297.0
+margin_bottom = 78.0
+rect_scale = Vector2( 4.84964, 4.84964 )
+custom_fonts/font = ExtResource( 1 )
+text = "ESCAPE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="escapeArrow" type="Label" parent="escapeStuff"]
+margin_left = 1519.0
+margin_top = 251.0
+margin_right = 1559.0
+margin_bottom = 265.0
+rect_rotation = 89.9999
+rect_scale = Vector2( 7.94511, 7.94511 )
+custom_fonts/font = ExtResource( 1 )
+text = ">"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="escapeArrow2" type="Label" parent="escapeStuff"]
+margin_left = 1444.0
+margin_top = 468.0
+margin_right = 1484.0
+margin_bottom = 482.0
+rect_rotation = -89.9999
+rect_scale = Vector2( 7.94511, 7.94511 )
+custom_fonts/font = ExtResource( 1 )
+text = ">"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="level1" to="." method="_on_level1_pressed"]
+[connection signal="pressed" from="level2" to="." method="_on_level2_pressed"]
+[connection signal="pressed" from="level3" to="." method="_on_level3_pressed"]
+[connection signal="pressed" from="level4" to="." method="_on_level4_pressed"]
+[connection signal="pressed" from="level5" to="." method="_on_level5_pressed"]
+[connection signal="pressed" from="level6" to="." method="_on_level6_pressed"]

@@ -3,6 +3,7 @@ extends KinematicBody2D
 
 var playerLoc
 var speed = 30
+var baseSpeed
 
 var maxHP = 100
 var HP = 100
@@ -36,6 +37,8 @@ var yelling = false
 func _ready():
 	lastSceenPos = position
 	navDest = global_position
+	baseSpeed = rand_range(15,35)
+	speed = baseSpeed
 
 func _process(delta):
 	moving = true
@@ -103,11 +106,11 @@ func _process(delta):
 	(get_tree().get_nodes_in_group("player")[0].global_position) < 30:
 		yelling = true
 		if !legsBroken:
-			speed = 40 + rand_range(-10,10)
+			speed = baseSpeed * 1.3
 	else:
 		yelling = false
 		if !legsBroken:
-			speed = 25
+			speed = baseSpeed
 
 
 	hideAll()

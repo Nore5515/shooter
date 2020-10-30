@@ -59,3 +59,18 @@ rect_scale = Vector2( 2.28993, 2.27798 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ProgressBar" type="ProgressBar" parent="." groups=[
+"hpBar",
+]]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -150.375
+margin_right = 150.375
+margin_bottom = 14.0
+rect_scale = Vector2( 1.22064, 1.22064 )
+value = 100.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}

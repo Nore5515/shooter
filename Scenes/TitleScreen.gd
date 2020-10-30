@@ -15,6 +15,7 @@ var secretCode2 = [5,5,1,5]
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_node("/root/Global").resetCampaign()
 
 func _process(delta):
 	$Cash.text = "$" + String(get_node("/root/Global").cash)

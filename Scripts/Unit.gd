@@ -38,6 +38,16 @@ var zoomed = false
 var recoil = 0
 
 var dead = false
+var HP = 100
+var maxHP = 100
+
+var infected = false
+var infectionRate = 2
+var infectionRateMax = 30
+var infectionPeaked = false
+
+
+var movement = Vector2(0,0)
 
 
 func _ready():
@@ -58,6 +68,18 @@ func _ready():
 
 func die():
 	if !dead:
+		
+		if get_tree().get_nodes_in_group("hpBar").size() > 0:
+			if HP > 10:
+				HP -= 10
+				if rand_range(1,100) < 75:
+					infected = true
+					print ("INFECTED")
+				get_tree().get_nodes_in_group("hpBar")[0].value = HP
+				return
+			else:
+				pass
+		
 		dead = true
 		$deathTimer.start()
 		$bloodParticles.visible = true
@@ -97,6 +119,30 @@ func die():
 func _process(_delta):
 	
 	if !dead:
+		
+		
+		if infected:
+			if rand_range(0,100) < infectionRate:
+				HP -= 1
+				get_tree().get_nodes_in_group("hpBar")[0].value = HP
+			if rand_range(0,100) < 20:
+				if infectionPeaked == false:
+					if infectionRate < infectionRateMax:
+						infectionRate += 1
+					else:
+						infectionPeaked = true
+				if infectionPeaked == true:
+					if infectionRate > 0:
+						infectionRate -= 1
+						get_tree().get_nodes_in_group("hpBar")[0].value = HP
+					else:
+						infected = false
+						infectionPeaked = false
+						infectionRate = 2
+						print ("infection gone!")
+			if HP <= 0:
+				die()
+					
 		
 		if arFiring:
 			if arCooldown > 0:
@@ -169,16 +215,8 @@ func _process(_delta):
 		$HandPivot.rotation = lerp($HandPivot.rotation, directionToMouse.angle(), 0.25)
 		
 		if get_global_mouse_position().x > global_position.x:
-			#$HandPivot/Pistol.flip_v = false
-			#$HandPivot/ARwithMag.flip_v = false
-			#$HandPivot/ARwithoutMag.flip_v = false
-			
 			$HandPivot.scale = Vector2(1,1)
 		else:
-			#$HandPivot/Pistol.flip_v = true
-			#$HandPivot/ARwithMag.flip_v = true
-			#$HandPivot/ARwithoutMag.flip_v = true
-	
 			$HandPivot.scale = Vector2(1,-1)
 			
 			
@@ -197,17 +235,33 @@ func _process(_delta):
 			
 	
 		# MOVEMENT STUFF
+		
+		movement = lerp(movement, Vector2(0,0), 0.2)
+		
+		var buildupSpeed = speed
+		if movement.length() < 100:
+			buildupSpeed = speed * (movement.length() / 100) + speed * 0.2
+		
+		
 		if left:
-			move_and_slide(Vector2.LEFT * speed)
+			movement += Vector2.LEFT * buildupSpeed
+			#move_and_slide(Vector2.LEFT * speed)
 			$playerParts.scale = Vector2(1,1)
 		if right:
-			move_and_slide(Vector2.RIGHT * speed)
+			movement += Vector2.RIGHT * buildupSpeed
+			#move_and_slide(Vector2.RIGHT * speed)
 			$playerParts.scale = Vector2(-1,1)
 		if up:
-			move_and_slide(Vector2.UP * speed)
+			movement += Vector2.UP * buildupSpeed
+			#move_and_slide(Vector2.UP * speed)
 		if down:
-			move_and_slide(Vector2.DOWN * speed)
-			
+			movement += Vector2.DOWN * buildupSpeed
+			#move_and_slide(Vector2.DOWN * speed)
+		
+		movement = movement.clamped(125)
+		
+		move_and_slide(movement)
+		
 		if left || right || up || down:
 			if sprinting:
 				get_parent().get_node("AimingReticle").recoilReticle(0.075)

@@ -4,6 +4,14 @@ extends Node2D
 # get_node("/root/Global")
 
 
+
+### CAMPAIGN STUFF
+var firstChoice = true
+var secondChoice = false
+var boss = false
+var escape = false
+
+
 var bestZombiesTime = "N/A"
 var bestTimeTrial2Time = "N/A"
 var bestTargetSpeedrunTime = "N/A"
@@ -61,3 +69,10 @@ var arUpgradeCosts = [20,40,60,80,100,140,160,220,260,300]
 var arUpgradeAmount = 5
 
 var arAmmoMultiplier = 1
+
+
+func resetCampaign():
+	firstChoice = true
+	secondChoice = false
+	boss = false
+	escape = false
